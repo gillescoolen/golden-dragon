@@ -58,4 +58,4 @@ Als klant wil ik via de website een afhaal bestelling doorgeven. Bij de bedanktp
 Als admin kan ik gerechten toevoegen, aanpassen en verwijderen zodat het menu up-to-date gehouden kan worden. De nummering moet wel gelijk blijven. Je zal dus met a,b,c moeten werken bij huidige. Bij echt nieuwe gerechten/categorie kan de nummering doorlopen
 
 ### 4.2
-Als admin kan ik gerechten toevoegen, aanpassen en verwijderen zodat het menu up-to-date gehouden kan worden. De nummering moet wel gelijk blijven. Je zal dus met a,b,c moeten werken bij huidige. Bij echt nieuwe gerechten/categorie kan de nummering doorlopen
+Het menu wordt automatisch gegenereerd op de verschillende webpaginas vanuit de informatie in de database zodat alle menu informatie op alle plekken consistent is.

@@ -37,7 +37,9 @@ Als klant wil ik een herhalingsbestelling doen bij mijn tafel. Met andere woorde
 ## Cash Registry
 
 ### 2.2
-Als klant wil ik een herhalingsbestelling doen bij mijn tafel. Met andere woorden, er is een historie waaruit ik makkelijk een nieuwe bestelling kan plaatsen
+Als kassamedewerker kan ik opmerkingen toevoegen aan een gerecht op een bestelling zodat klant specifieke wensen meegenomen kunnen worden in de bestelling 
+
+- Ieder gerecht op een bestelling zou dus opmerkingen kunnen krijgen, bv. “geen ui toevoegen.” 
 
 ### 2.3
 Als kassamedewerker kan ik per gerecht aangeven of de klant witte rijst, nasi/bami goreng, mihoen goreng of chinese bami wil. 

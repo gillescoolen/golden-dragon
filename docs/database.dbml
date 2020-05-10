@@ -17,6 +17,7 @@ Table users {
 Table dishes {
   id int [pk, increment]
   name varchar(255) [not null, note: 'The dish name.']
+  description text [null, note: 'The dish description.']
   price double(18,2) [not null, note: 'Price is in euro\'s.']
   index int [not null, note: 'This number is used as the menu number.']
   character char(1) [null, note: 'Character after the index. For example, it\'s the a in 16a.']

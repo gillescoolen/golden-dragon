@@ -32,7 +32,8 @@ class CategorySeeder extends Seeder
             ['name' => 'VEGETARISCHE GERECHTEN (met witte rijst)'],
             ['name' => 'KINDERMENUS'],
             ['name' => 'RIJSTTAFELS'],
-            ['name' => 'BUFFET']
+            ['name' => 'BUFFET'],
+            ['name' => 'DIVERSEN']
         ]);
     }
 }

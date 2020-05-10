@@ -47,6 +47,7 @@ Table dish_allergies {
 
 Table orders {
   id int [pk, increment]
+  comment text [not null, note: 'A note containing information specific to this order.']
   date date [not null, default: `now()`, note: 'The date the order was placed.']
 
   Note: 'A row in the orders table is used to store the date a order is placed on. This row is then referenced in the order_dishes table.'

@@ -20,6 +20,7 @@ Table dishes {
   price double(18,2) [not null, note: 'Price is in euro\'s.']
   index int [not null, note: 'This number is used as the menu number.']
   character char(1) [null, note: 'Character after the index. For example, it\'s the a in 16a.']
+  spicyness int [default: 0, note: 'Indicates how spicy the dish is. When this is 0, the dish isn\'t spicy at all. Maximum level is 3.']
   category varchar(255) [not null, ref: > categories.name, note: 'The category the dish belongs to.']
 
   Note: 'A row in dishes table is used to store all information related to a single dish.'
@@ -29,6 +30,19 @@ Table categories {
   name varchar(255) [pk, note: 'The category name.']
 
   Note: 'A row in the categories table is used to store a single category name, which is then referenced in the dishes table.'
+}
+
+Table allergies {
+  description varchar(255) [pk, not null, note: 'The alergy description.']
+
+  Note: 'A row in the allergies table is used to store a single allergy description, which is then referenced in the dishes table.'
+}
+
+Table dish_allergies {
+  dish_id int [ref: < dishes.id]
+  allergy varchar(255) [ref: < allergies.description]
+
+  Note: 'A row in the order_dishes table is used to link a dish with an amount to an order.'
 }
 
 Table orders {

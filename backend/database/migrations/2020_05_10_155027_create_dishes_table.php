@@ -16,11 +16,12 @@ class CreateDishesTable extends Migration
         Schema::create('dishes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->text('description')->nullable();
             $table->double('price', 18, 2);
+            $table->char('prefix', 1)->nullable();
             $table->integer('index');
-            $table->char('character', 1);
-            $table->integer('spicyness');
+            $table->char('suffix', 1)->nullable();
+            $table->integer('spicyness')->default(0);
             $table->string('category');
             $table->foreign('category')->references('name')->on('categories');
         });

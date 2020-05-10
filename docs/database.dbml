@@ -1,0 +1,47 @@
+Project golden_dragon {
+  database_type: 'MySQL'
+  Note: '''
+    Database Design for the Golden Dragon.
+
+    For more information, read the README.md in the github repository.
+  '''
+} 
+
+Table users {
+  id int [pk, increment, note: 'Also used as the login username.']
+  password varchar(255) [not null, note: 'The hashed password.']
+
+  Note: 'A row in dishes table is used to store the user ID and password for a single user.'
+}
+
+Table dishes {
+  id int [pk, increment]
+  name varchar(255) [not null, note: 'The dish name.']
+  price double(18,2) [not null, note: 'Price is in euro\'s.']
+  index int [not null, note: 'This number is used as the menu number.']
+  character char(1) [null, note: 'Character after the index. For example, it\'s the a in 16a.']
+  category varchar(255) [not null, ref: > categories.name, note: 'The category the dish belongs to.']
+
+  Note: 'A row in dishes table is used to store all information related to a single dish.'
+}
+
+Table categories {
+  name varchar(255) [pk, note: 'The category name.']
+
+  Note: 'A row in the categories table is used to store a single category name, which is then referenced in the dishes table.'
+}
+
+Table orders {
+  id int [pk, increment]
+  date date [not null, default: `now()`, note: 'The date the order was placed.']
+
+  Note: 'A row in the orders table is used to store the date a order is placed on. This row is then referenced in the order_dishes table.'
+}
+
+Table order_dishes {
+  order_id int [ref: < orders.id]
+  dish_id int [ref: < dishes.id]
+  amount int [not null, note: 'The amount of times this dish was added to the referenced order.']
+
+  Note: 'A row in the order_dishes table is used to link a dish with an amount to an order.'
+}

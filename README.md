@@ -14,3 +14,8 @@
 2. Open a terminal in the `frontend` folder and run `$ npm i`.
 3. Run `$ npm start` in your terminal.
 4. Voilà! View the page at [http://localhost:8080](http://localhost:8080).
+
+## Documenting the Database.
+1. Make sure you have [Node](https://nodejs.org/en/) & [dbdocs.io](https://dbdocs.io/) installed!
+2. Run `dbdocs build docs/database.dbml` in your terminal.
+3. Voilà! View the page at [dbdocs.io/GillesWHC/golden_dragon](https://dbdocs.io/GillesWHC/golden_dragon).

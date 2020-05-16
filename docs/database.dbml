@@ -35,7 +35,7 @@ Table categories {
 }
 
 Table allergies {
-  description varchar(255) [pk, not null, note: 'The alergy description.']
+  description varchar(255) [pk, not null, note: 'The allergy description.']
 
   Note: 'A row in the allergies table is used to store a single allergy description, which is then referenced in the dishes table.'
 }

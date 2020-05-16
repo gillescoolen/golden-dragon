@@ -1,32 +1,59 @@
 <template>
-  <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link>|
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view />
+  <div>
+    <component :is="layout">
+      <router-view></router-view>
+    </component>
   </div>
 </template>
 
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import api from './utils/api';
+
+@Component
+export default class App extends Vue {
+  layout = null;
+
+  created() {
+    /**
+     * Assign the layout in created() because
+     * the route params don't exist when
+     * constructing this component.
+     */
+    this.layout = this.$route.meta.layout;
+  }
+
+  mounted() {
+    /**
+     * Request the laravel CSRF token.
+     * We don't have it by default because
+     * we're not injecting it using blade.
+     */
+    api.get('/sanctum/csrf-cookie');
+  }
+}
+</script>
+
 <style lang="scss">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+@font-face {
+  font-family: 'Jost';
+  src: url('assets/fonts/jost.ttf');
+}
+:root {
+  --primary: #d45555;
+  --secondary: #cf774e;
+  --error: #c70000;
+  --gray: #979797;
 }
 
-#nav {
-  padding: 30px;
+* {
+  font-weight: normal;
+  box-sizing: border-box;
+  font-family: 'Jost', Arial, Helvetica, sans-serif;
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+body {
+  margin: 0;
+  padding: 0;
 }
 </style>

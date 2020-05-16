@@ -25,9 +25,21 @@ export default class App extends Vue {
 </script>
 
 <style lang="scss">
+@font-face {
+  font-family: 'Jost';
+  src: url('assets/fonts/jost.ttf');
+}
+:root {
+  --primary: #d45555;
+  --secondary: #cf774e;
+  --error: #c70000;
+  --gray: #979797;
+}
+
 * {
+  font-weight: normal;
   box-sizing: border-box;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Jost', Arial, Helvetica, sans-serif;
 }
 
 body {

@@ -8,6 +8,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import api from './utils/api';
 
 @Component
 export default class App extends Vue {
@@ -20,6 +21,15 @@ export default class App extends Vue {
      * constructing this component.
      */
     this.layout = this.$route.meta.layout;
+  }
+
+  mounted() {
+    /**
+     * Request the laravel CSRF token.
+     * We don't have it by default because
+     * we're not injecting it using blade.
+     */
+    api.get('/sanctum/csrf-cookie');
   }
 }
 </script>

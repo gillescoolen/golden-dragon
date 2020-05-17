@@ -27,9 +27,10 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Input from '@/components/UI/Input.vue';
-import Button from '@/components/UI/Button.vue';
+import Input from '@/components/Input.vue';
+import Button from '@/components/Button.vue';
 import { Action } from 'vuex-class';
+import { AuthenticationPayload } from '@/types';
 
 @Component({
   components: {
@@ -43,7 +44,7 @@ export default class Login extends Vue {
   error = '';
 
   @Action('authenticate', { namespace: 'auth' })
-  authenticate!: (payload: { id: number; password: string }) => void;
+  authenticate!: (payload: AuthenticationPayload) => void;
 
   /**
    * Calls the store to authenticate the user.

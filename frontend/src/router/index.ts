@@ -1,13 +1,13 @@
+import AuthLayout from '@/layouts/AuthLayout.vue';
+import RegisterLayout from '@/layouts/RegisterLayout.vue';
+import SiteLayout from '@/layouts/SiteLayout.vue';
+import TabletLayout from '@/layouts/TabletLayout.vue';
+import Login from '@/views/Auth/Login.vue';
+import Home from '@/views/Site/Home.vue';
+import Dish from '@/views/Tablet/Dish.vue';
+import Dishes from '@/views/Tablet/Dishes.vue';
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
-
-import Home from '@/views/Site/Home.vue';
-import Login from '@/views/Auth/Login.vue';
-
-import SiteLayout from '@/layouts/SiteLayout.vue';
-import AuthLayout from '@/layouts/AuthLayout.vue';
-import TabletLayout from '@/layouts/TabletLayout.vue';
-import RegisterLayout from '@/layouts/RegisterLayout.vue';
 
 Vue.use(VueRouter);
 Vue.component('site-layout', SiteLayout);
@@ -62,8 +62,16 @@ const routes: Array<RouteConfig> = [
     path: '/tablet',
     name: 'Tablet',
     meta: { layout: 'tablet-layout' },
-    component: () =>
-      import(/* webpackChunkName: "tablet" */ '@/views/Tablet/Index.vue')
+    component: Dishes
+  },
+  {
+    path: '/tablet/:id',
+    name: 'Dish',
+    meta: { layout: 'tablet-layout' },
+    component: Dish,
+    props: route => ({
+      ...route.params
+    })
   }
 ];
 

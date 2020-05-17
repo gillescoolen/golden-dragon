@@ -10,6 +10,7 @@ class Allergy extends Model
     protected $primaryKey = 'description';
     protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = false;
 
     public function dishes()
     {

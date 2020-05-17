@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dish extends Model
 {
+    public $timestamps = false;
+
     protected $fillable = [
         'name', 'price', 'index', 'character', 'spicyness', 'category'
     ];

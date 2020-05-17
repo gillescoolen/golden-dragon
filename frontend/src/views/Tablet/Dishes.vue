@@ -18,14 +18,14 @@
           <Button @click.native="showOrder()">Bestelling</Button>
         </div>
       </div>
-      <div v-if="dishes" class="dishes">
+      <transition-group name="list" tag="div" class="dishes">
         <DishItem
           v-for="dish in dishes"
           :key="dish.id"
           :dish="dish"
           @click.native="$router.push(`/tablet/${dish.id}`)"
         />
-      </div>
+      </transition-group>
     </div>
   </div>
 </template>
@@ -63,9 +63,6 @@ export default class Dishes extends Vue {
     this.show = true;
   }
 
-  /**
-   * Fetch all dishes from the API.
-   */
   public async fetchDishes() {
     const { data: dishes } = await api.get('/api/dishes');
     this.dishes = dishes;
@@ -145,5 +142,15 @@ export default class Dishes extends Vue {
 .fade-enter,
 .fade-leave-to {
   opacity: 0;
+}
+
+.list-enter-active,
+.list-leave-active {
+  transition: all 0.2s ease-out;
+}
+.list-enter,
+.list-leave-to {
+  opacity: 0;
+  transform: translateY(2rem);
 }
 </style>

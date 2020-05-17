@@ -40,8 +40,8 @@ export default class App extends Vue {
   src: url('assets/fonts/jost.ttf');
 }
 :root {
-  --primary: #d45555;
-  --secondary: #cf774e;
+  --primary: #dd4d4d;
+  --secondary: #dd7748;
   --error: #c70000;
   --gray: #979797;
 }

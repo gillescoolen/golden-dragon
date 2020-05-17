@@ -22,11 +22,17 @@ export default class Modal extends Vue {}
   position: absolute;
   min-width: 30rem;
 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   .content {
+    top: 0;
+    width: 80vw;
     margin: 3rem;
-    height: 70vh;
+    height: 80vh;
     z-index: 200;
-    padding: 3rem;
+    padding: 2rem;
     border-radius: 1rem;
     background-color: white;
     box-shadow: 0 0 1rem 0 #00000036;
@@ -34,6 +40,7 @@ export default class Modal extends Vue {}
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    position: fixed;
   }
 }
 </style>

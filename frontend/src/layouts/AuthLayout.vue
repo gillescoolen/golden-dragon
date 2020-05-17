@@ -27,7 +27,7 @@
     padding: 2rem;
     height: 25rem;
     border-radius: 1rem;
-    background-color: #ffffff;
+    background-color: white;
     box-shadow: 0 0 0.5rem 0 #00000010;
   }
 }

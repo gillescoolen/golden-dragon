@@ -13,7 +13,7 @@ class CreateOrderDishesTable extends Migration
      */
     public function up()
     {
-        Schema::create('order_dishes', function (Blueprint $table) {
+        Schema::create('dish_order', function (Blueprint $table) {
             $table->foreignId('order_id');
             $table->foreign('order_id')->references('id')->on('orders')
                 ->onDelete('cascade');

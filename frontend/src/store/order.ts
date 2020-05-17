@@ -5,7 +5,7 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators';
   namespaced: true
 })
 export default class Order extends VuexModule {
-  dish: Dish | null = null;
+  dish!: Dish;
   order: Dish[] = [];
 
   /**
@@ -49,5 +49,9 @@ export default class Order extends VuexModule {
   @Mutation
   setDish(dish: Dish) {
     this.dish = dish;
+  }
+
+  public get getDish(): Dish {
+    return this.dish;
   }
 }

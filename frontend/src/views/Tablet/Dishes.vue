@@ -1,6 +1,11 @@
 <template>
-  <div class="dishes">
-    <Item v-for="dish in dishes" :key="dish.id" :dish="dish" />
+  <div v-if="dishes" class="dishes">
+    <DishItem
+      v-for="dish in dishes"
+      :key="dish.id"
+      :dish="dish"
+      @click.native="$router.push(`/tablet/${dish.id}`)"
+    />
   </div>
 </template>
 
@@ -10,26 +15,20 @@ import { Mutation } from 'vuex-class';
 import { Dish } from '../../types';
 import api from '../../utils/api';
 
-import Item from '@/components/Item.vue';
+import Modal from '@/components/Modal.vue';
+import DishItem from '@/components/DishItem.vue';
 
 @Component({
   components: {
-    Item
+    Modal,
+    DishItem
   }
 })
-export default class Login extends Vue {
-  dishes: Dish[] = [];
+export default class Dishes extends Vue {
+  dishes: Dish[] | null = null;
 
-  @Mutation('addDish', { namespace: 'order' })
-  addDish!: (dish: Dish) => void;
-
-  /**
-   * Adds a dish to the order.
-   */
-  public add(dish: Dish) {
-    console.log(dish);
-    this.addDish(dish);
-  }
+  @Mutation('setDish', { namespace: 'order' })
+  setDish!: (dish: Dish) => void;
 
   /**
    * Fetch all dishes from the API.
@@ -47,9 +46,11 @@ export default class Login extends Vue {
 
 <style lang="scss" scoped>
 .dishes {
+  margin: 0;
+  padding: 0;
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
   flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 }
 </style>

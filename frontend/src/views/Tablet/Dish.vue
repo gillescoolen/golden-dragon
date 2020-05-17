@@ -1,0 +1,93 @@
+<template>
+  <div class="dish" v-if="dish">
+    <div class="header">
+      <Button :small="true" @click.native="$router.go(-1)">Terug</Button>
+      <Button :small="true">Bestellen</Button>
+    </div>
+    <h1>
+      {{ `${dish.prefix}${dish.index}${dish.suffix}. ${dish.name}` }}
+    </h1>
+    <p>{{ dish.description }}</p>
+    <div class="spicyness" v-if="dish.spicyness">
+      Pittigheid:
+      <div v-for="index in dish.spicyness" :key="index" class="spicy"></div>
+    </div>
+    <div v-else>
+      Dit gerecht is niet pittig.
+    </div>
+    <ul class="allergies">
+      Dit gerecht:
+      <li v-for="allergy in dish.allergies" :key="allergy.description">
+        - {{ allergy.description }}
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { Getter, Mutation } from 'vuex-class';
+import { Dish } from '../../types';
+import Button from '@/components/Button.vue';
+import api from '../../utils/api';
+
+@Component({
+  components: {
+    Button
+  }
+})
+export default class Single extends Vue {
+  dish: Dish | null = null;
+
+  /**
+   * Fetch dish due to the store updating
+   * a bit slow sometimes, causing the
+   * error page to show.
+   */
+  async created() {
+    const { data: dish } = await api.get(
+      `/api/dishes/${this.$route.params.id}`
+    );
+
+    this.dish = dish;
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+.dish {
+  width: 100%;
+  padding: 2rem;
+  height: 50vh;
+  margin: 5rem;
+  border-radius: 1rem;
+  background-color: white;
+
+  .header {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .spicyness {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+
+    .spicy {
+      width: 0.8rem;
+      height: 0.8rem;
+      margin: 0 0.1rem;
+      border-radius: 100%;
+      background-color: #e35050;
+    }
+  }
+
+  .allergies {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+</style>

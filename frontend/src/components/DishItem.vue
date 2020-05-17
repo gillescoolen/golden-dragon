@@ -1,9 +1,9 @@
 <template>
   <div class="item">
     <div class="image" :style="{ 'background-color': color }"></div>
-    <div class="content">
+    <span class="content">
       {{ dish.name }}
-    </div>
+    </span>
   </div>
 </template>
 
@@ -12,7 +12,7 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Dish } from '../types';
 
 @Component
-export default class Item extends Vue {
+export default class DishItem extends Vue {
   @Prop()
   dish!: Dish;
 
@@ -60,7 +60,9 @@ export default class Item extends Vue {
   .content {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: top;
+
+    overflow: hidden !important;
 
     height: 4rem;
     padding: 0.3rem;

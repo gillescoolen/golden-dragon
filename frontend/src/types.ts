@@ -8,6 +8,12 @@ export type Dish = {
   suffix: null | string;
   spicyness: number;
   category: string;
+  allergies: Allergy[];
+  amount: number;
+};
+
+export type Allergy = {
+  description: string;
 };
 
 export type AuthenticationPayload = {

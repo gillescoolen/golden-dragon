@@ -3,6 +3,7 @@ import VueRouter, { RouteConfig } from 'vue-router';
 
 import Home from '@/views/Site/Home.vue';
 import Login from '@/views/Auth/Login.vue';
+import Tablet from '@/views/Tablet/Index.vue';
 
 import SiteLayout from '@/layouts/SiteLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
@@ -62,8 +63,7 @@ const routes: Array<RouteConfig> = [
     path: '/tablet',
     name: 'Tablet',
     meta: { layout: 'tablet-layout' },
-    component: () =>
-      import(/* webpackChunkName: "tablet" */ '@/views/Tablet/Index.vue')
+    component: Tablet
   }
 ];
 

@@ -24,6 +24,11 @@ button {
   font-weight: 700;
   border-radius: 1rem;
   background: linear-gradient(124deg, var(--primary), var(--secondary));
+
+  &:disabled {
+    cursor: default;
+    background: var(--gray);
+  }
 }
 
 .small {

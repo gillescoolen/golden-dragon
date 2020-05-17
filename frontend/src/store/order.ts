@@ -5,7 +5,6 @@ import { Module, Mutation, VuexModule } from 'vuex-module-decorators';
   namespaced: true
 })
 export default class Order extends VuexModule {
-  dish!: Dish;
   order: Dish[] = [];
 
   /**
@@ -19,8 +18,8 @@ export default class Order extends VuexModule {
   addDish(dish: Dish) {
     const index = this.order.findIndex(item => item.id === dish.id);
 
-    index
-      ? this.order[index].amount + 1
+    index != -1
+      ? this.order[index].amount++
       : this.order.push({ ...dish, amount: 1 });
   }
 
@@ -36,22 +35,10 @@ export default class Order extends VuexModule {
     const index = this.order.findIndex(item => item.id === dish.id);
     const item = this.order[index];
 
-    item && item.amount > 1
-      ? this.order[index].amount - 1
-      : this.order.splice(index, 1);
+    item.amount > 1 ? this.order[index].amount-- : this.order.splice(index, 1);
   }
 
-  /**
-   * Set the dish so the single dish page
-   * can show dish info.
-   * @param dish The selected dish.
-   */
-  @Mutation
-  setDish(dish: Dish) {
-    this.dish = dish;
-  }
-
-  public get getDish(): Dish {
-    return this.dish;
+  public get getOrder(): Dish[] {
+    return this.order;
   }
 }

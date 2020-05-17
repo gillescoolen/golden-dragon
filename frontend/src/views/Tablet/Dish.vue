@@ -1,8 +1,10 @@
 <template>
   <div class="dish" v-if="dish">
     <div class="header">
-      <Button :small="true" @click.native="$router.go(-1)">Terug</Button>
-      <Button :small="true">Bestellen</Button>
+      <Button :small="true" @click.native="$router.push('/tablet')"
+        >Terug</Button
+      >
+      <Button @click.native="order(dish)" :small="true">Bestellen</Button>
     </div>
     <h1>
       {{ `${dish.prefix}${dish.index}${dish.suffix}. ${dish.name}` }}
@@ -15,7 +17,7 @@
     <div v-else>
       Dit gerecht is niet pittig.
     </div>
-    <ul class="allergies">
+    <ul v-if="dish.allergies.length" class="allergies">
       Dit gerecht:
       <li v-for="allergy in dish.allergies" :key="allergy.description">
         - {{ allergy.description }}
@@ -26,7 +28,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Getter, Mutation } from 'vuex-class';
+import { Mutation } from 'vuex-class';
 import { Dish } from '../../types';
 import Button from '@/components/Button.vue';
 import api from '../../utils/api';
@@ -38,6 +40,17 @@ import api from '../../utils/api';
 })
 export default class Single extends Vue {
   dish: Dish | null = null;
+
+  @Mutation('addDish', { namespace: 'order' })
+  addDish!: (dish: Dish) => void;
+
+  public order(dish: Dish) {
+    this.$toasted.show(`${dish.name} is toegevoegd!`, {
+      duration: 1000,
+      position: 'top-center'
+    });
+    this.addDish(dish);
+  }
 
   /**
    * Fetch dish due to the store updating
@@ -62,6 +75,7 @@ export default class Single extends Vue {
   margin: 5rem;
   border-radius: 1rem;
   background-color: white;
+  box-shadow: 0 0 1rem 0 #00000036;
 
   .header {
     display: flex;

@@ -1,21 +1,16 @@
 <template>
   <div class="wrapper">
     <transition name="fade" mode="out-in">
-      <Modal class="order" v-if="show" @close="show = false">
-        <h1>Huidige bestelling</h1>
-        <div class="ordered-dishes">
-          <OrderRow v-for="dish in order" :key="dish.id" :dish="dish" />
-        </div>
-        <Button>Bestelling plaatsen</Button>
-      </Modal>
+      <OrderModal v-if="show" @close="show = false" />
     </transition>
-
     <div :class="{ blur: show }">
       <div class="header">
         <h1>Gerechten</h1>
         <div class="buttons">
-          <Button>Geschiedenis</Button>
-          <Button @click.native="showOrder()">Bestelling</Button>
+          <Button @click.native="$router.push('/tablet/history')"
+            >Geschiedenis</Button
+          >
+          <Button @click.native="show = true">Bestelling</Button>
         </div>
       </div>
       <transition-group name="list" tag="div" class="dishes">
@@ -32,38 +27,25 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { Mutation, Getter } from 'vuex-class';
-import { Dish } from '../../types';
-import api from '../../utils/api';
+import { Dish } from '@/types';
+import api from '@/utils/api';
 
-import Modal from '@/components/Modal.vue';
 import Button from '@/components/Button.vue';
 import DishItem from '@/components/DishItem.vue';
-import OrderRow from '@/components/OrderRow.vue';
+import OrderModal from '@/components/OrderModal.vue';
 
 @Component({
   components: {
-    Modal,
     Button,
     DishItem,
-    OrderRow
+    OrderModal
   }
 })
 export default class Dishes extends Vue {
   show = false;
   dishes: Dish[] | null = null;
 
-  @Mutation('setDish', { namespace: 'order' })
-  setDish!: (dish: Dish) => void;
-
-  @Getter('getOrder', { namespace: 'order' })
-  order!: Dish[];
-
-  public showOrder() {
-    this.show = true;
-  }
-
-  public async fetchDishes() {
+  private async fetchDishes() {
     const { data: dishes } = await api.get('/api/dishes');
     this.dishes = dishes;
   }
@@ -88,8 +70,17 @@ export default class Dishes extends Vue {
       overflow-y: scroll;
     }
 
-    button {
+    .submit {
       margin-top: 1rem;
+    }
+
+    .amount {
+      text-align: center;
+      font-size: 1.3rem;
+    }
+
+    button {
+      width: 6rem;
     }
   }
 

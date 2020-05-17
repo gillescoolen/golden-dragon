@@ -1,10 +1,8 @@
 <template>
   <div class="row">
-    <h3>{{ dish.name }}</h3>
+    <h3>{{ name }}</h3>
     <div class="side">
-      <Button small="true" @click.native="addDish(dish)">Meer!</Button>
-      <span class="amount">{{ dish.amount }}</span>
-      <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
+      <slot />
     </div>
   </div>
 </template>
@@ -12,23 +10,15 @@
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
 import Button from '@/components/Button.vue';
-import { Dish } from '@/types';
-import { Mutation } from 'vuex-class';
 
 @Component({
   components: {
     Button
   }
 })
-export default class OrderRow extends Vue {
+export default class Row extends Vue {
   @Prop()
-  dish!: Dish;
-
-  @Mutation('addDish', { namespace: 'order' })
-  addDish!: (dish: Dish) => void;
-
-  @Mutation('removeDish', { namespace: 'order' })
-  removeDish!: (dish: Dish) => void;
+  name!: string;
 }
 </script>
 
@@ -48,15 +38,10 @@ export default class OrderRow extends Vue {
   }
 
   .side {
-    width: 15rem;
-
     display: flex;
     flex-direction: row;
+    align-items: center;
     justify-content: space-between;
-
-    .amount {
-      font-size: 1.3rem;
-    }
   }
 }
 </style>

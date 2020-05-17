@@ -41,7 +41,7 @@ import api from '../../utils/api';
 export default class Single extends Vue {
   dish: Dish | null = null;
 
-  @Mutation('addDish', { namespace: 'order' })
+  @Mutation('addDish', { namespace: 'tablet' })
   addDish!: (dish: Dish) => void;
 
   public order(dish: Dish) {
@@ -50,13 +50,9 @@ export default class Single extends Vue {
       position: 'top-center'
     });
     this.addDish(dish);
+    this.$router.push('/tablet');
   }
 
-  /**
-   * Fetch dish due to the store updating
-   * a bit slow sometimes, causing the
-   * error page to show.
-   */
   async created() {
     const { data: dish } = await api.get(
       `/api/dishes/${this.$route.params.id}`

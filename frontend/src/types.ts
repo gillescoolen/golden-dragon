@@ -12,6 +12,10 @@ export type Dish = {
   amount: number;
 };
 
+export type Order = {
+  dishes: Dish[];
+};
+
 export type Allergy = {
   description: string;
 };

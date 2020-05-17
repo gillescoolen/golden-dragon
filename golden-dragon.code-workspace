@@ -1,46 +1,14 @@
 {
   "folders": [
-    {
-      "path": "."
-    }
-  ],
-  "settings": {
-    "editor.tabSize": 2,
-    "files.exclude": {
-      "**/.classpath": true,
-      "**/.factorypath": true,
-      "**/.flat": true,
-      "**/.project": true,
-      "**/.settings": true,
-      "**/.vscode": true,
-      "**/node_modules": true,
-      "*.code-workspace": true,
-      ".github": true,
-      "extensions.json": true
-    },
-    "files.watcherExclude": {
-      "**/.git/objects/**": true,
-      "**/.git/subtree-cache/**": true,
-      "**/node_modules/**": true,
-      "**/.hg/store/**": true,
-      "/platforms/**": true
-    },
-    "[php]": {
-      "editor.defaultFormatter": "bmewburn.vscode-intelephense-client",
-      "editor.tabSize": 4
-    },
-    "[vue]": {
-      "editor.defaultFormatter": "octref.vetur",
-    },
-    "prettier.tabWidth": 2,
-    "prettier.useTabs": false,
-    "[typescript]": {
-      "editor.defaultFormatter": "remimarsal.prettier-now"
-    },
-    "editor.codeActionsOnSave": {
-      "source.fixAll.tslint": true,
-      "source.fixAll": true,
-    },
-    "javascript.updateImportsOnFileMove.enabled": "always",
-  }
+	{
+		"path": "frontend"
+	},
+	{
+		"path": "backend"
+	},
+	{
+		"path": "docs"
+	}
+],
+  "settings": {}
 }

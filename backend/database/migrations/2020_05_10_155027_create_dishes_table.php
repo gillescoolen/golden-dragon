@@ -18,9 +18,9 @@ class CreateDishesTable extends Migration
             $table->string('name');
             $table->text('description')->nullable();
             $table->double('price', 18, 2);
-            $table->char('prefix', 1)->nullable();
+            $table->char('prefix', 1)->default('');
             $table->integer('index');
-            $table->char('suffix', 1)->nullable();
+            $table->char('suffix', 1)->default('');
             $table->integer('spicyness')->default(0);
             $table->string('category');
             $table->foreign('category')->references('name')->on('categories');

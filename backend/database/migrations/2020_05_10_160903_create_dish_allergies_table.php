@@ -13,13 +13,13 @@ class CreateDishAllergiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('dish_allergies', function (Blueprint $table) {
+        Schema::create('allergy_dish', function (Blueprint $table) {
             $table->foreignId('dish_id');
             $table->foreign('dish_id')->references('id')->on('dishes')
                 ->onDelete('cascade');
 
-            $table->string('allergy');
-            $table->foreign('allergy')->references('description')->on('allergies')
+            $table->string('allergy_description');
+            $table->foreign('allergy_description')->references('description')->on('allergies')
                 ->onDelete('cascade');
         });
     }

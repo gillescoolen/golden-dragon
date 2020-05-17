@@ -1,6 +1,7 @@
 <?php
 
 use App\Dish;
+use Illuminate\Support\Facades\DB;
 use JeroenZwart\CsvSeeder\CsvSeeder;
 
 class DishSeeder extends CsvSeeder
@@ -28,6 +29,7 @@ class DishSeeder extends CsvSeeder
         $this->truncate = false;
         $this->delimiter = ',';
         $this->mapping = ['prefix', 'index', 'suffix', 'name', 'price', 'category', 'description'];
+        $this->defaults = ['prefix' => '', 'index' => 1, 'suffix' => '', 'name' => '', 'price' => 99, 'category' => null, 'description' => null];
         $this->file = '/database/seeds/csvs/dishes.csv';
         $this->timestamps = false;
     }
@@ -40,5 +42,32 @@ class DishSeeder extends CsvSeeder
     public function run()
     {
         parent::run();
+
+        DB::table('allergy_dish')->insert([
+            [
+                'dish_id' => 1,
+                'allergy_description' => 'Bevat gluten'
+            ],
+            [
+                'dish_id' => 1,
+                'allergy_description' => 'Bevat lactose'
+            ],
+            [
+                'dish_id' => 1,
+                'allergy_description' => 'Bevat lactose'
+            ],
+            [
+                'dish_id' => 2,
+                'allergy_description' => 'Bevat gluten'
+            ],
+            [
+                'dish_id' => 4,
+                'allergy_description' => 'Bevat gluten'
+            ],
+            [
+                'dish_id' => 4,
+                'allergy_description' => 'Bevat varkensvlees'
+            ],
+        ]);
     }
 }

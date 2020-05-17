@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Allergy extends Model
 {
     protected $table = 'allergies';
-    protected $primaryKey = 'name';
+    protected $primaryKey = 'description';
     protected $keyType = 'string';
     public $incrementing = false;
 

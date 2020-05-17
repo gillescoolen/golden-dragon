@@ -15,6 +15,6 @@ class DishController extends Controller
 
     public function single($id)
     {
-        return new DishResource(Dish::find($id));
+        return Dish::where('id', '=', $id)->with('allergies')->first();
     }
 }

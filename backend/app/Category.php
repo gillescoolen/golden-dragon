@@ -10,6 +10,7 @@ class Category extends Model
     protected $primaryKey = 'name';
     protected $keyType = 'string';
     public $incrementing = false;
+    public $timestamps = false;
 
     public function dishes()
     {

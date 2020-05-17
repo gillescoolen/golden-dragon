@@ -1,13 +1,19 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
+import VuexPersistence from 'vuex-persist';
 import auth from './auth';
-import order from './order';
+import tablet from './tablet';
 
 Vue.use(Vuex);
+
+const vuexLocal = new VuexPersistence({
+  storage: window.localStorage
+});
 
 export default new Vuex.Store({
   modules: {
     auth,
-    order
-  }
+    tablet
+  },
+  plugins: [vuexLocal.plugin]
 });

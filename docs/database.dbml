@@ -40,11 +40,11 @@ Table allergies {
   Note: 'A row in the allergies table is used to store a single allergy description, which is then referenced in the dishes table.'
 }
 
-Table dish_allergies {
+Table allergy_dish {
   dish_id int [ref: < dishes.id]
   allergy varchar(255) [ref: < allergies.description]
 
-  Note: 'A row in the order_dishes table is used to link a dish with an amount to an order.'
+  Note: 'A row in the allergy_dish table is used to link a dish with an amount to an order.'
 }
 
 Table orders {
@@ -52,13 +52,13 @@ Table orders {
   comment text [not null, note: 'A note containing information specific to this order.']
   date date [not null, default: `now()`, note: 'The date the order was placed.']
 
-  Note: 'A row in the orders table is used to store the date a order is placed on. This row is then referenced in the order_dishes table.'
+  Note: 'A row in the orders table is used to store the date a order is placed on. This row is then referenced in the dish_order table.'
 }
 
-Table order_dishes {
+Table dish_order {
   order_id int [ref: < orders.id]
   dish_id int [ref: < dishes.id]
   amount int [not null, note: 'The amount of times this dish was added to the referenced order.']
 
-  Note: 'A row in the order_dishes table is used to link a dish with an amount to an order.'
+  Note: 'A row in the dish_order table is used to link a dish with an amount to an order.'
 }

@@ -6,6 +6,7 @@ import Login from '@/views/Auth/Login.vue';
 import Home from '@/views/Site/Home.vue';
 import Dish from '@/views/Tablet/Dish.vue';
 import Dishes from '@/views/Tablet/Dishes.vue';
+import History from '@/views/Tablet/History.vue';
 import Vue from 'vue';
 import VueRouter, { RouteConfig } from 'vue-router';
 
@@ -65,13 +66,16 @@ const routes: Array<RouteConfig> = [
     component: Dishes
   },
   {
+    path: '/tablet/history',
+    name: 'History',
+    meta: { layout: 'tablet-layout' },
+    component: History
+  },
+  {
     path: '/tablet/:id',
     name: 'Dish',
     meta: { layout: 'tablet-layout' },
-    component: Dish,
-    props: route => ({
-      ...route.params
-    })
+    component: Dish
   }
 ];
 

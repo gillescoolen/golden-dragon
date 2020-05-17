@@ -54,7 +54,7 @@ class DishSeeder extends CsvSeeder
             ],
             [
                 'dish_id' => 1,
-                'allergy_description' => 'Bevat lactose'
+                'allergy_description' => 'Bevat varkensvlees'
             ],
             [
                 'dish_id' => 2,

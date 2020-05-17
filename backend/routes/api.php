@@ -23,3 +23,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
 Route::get('dishes', 'DishController@all');
 Route::get('dishes/{id}', 'DishController@single');
+
+Route::get('orders', 'OrderController@all');
+Route::get('orders/{id}', 'OrderController@single');
+Route::post('orders', 'OrderController@create');

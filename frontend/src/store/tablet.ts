@@ -47,6 +47,11 @@ export default class Tablet extends VuexModule {
     this.dishes = [];
   }
 
+  @Mutation
+  clearHistory() {
+    this.orders = [];
+  }
+
   /**
    * Add the submitted dishes to the store.
    *

@@ -11,6 +11,7 @@
             >Geschiedenis</Button
           >
           <Button @click.native="show = true">Bestelling</Button>
+          <Button @click.native="clear()">Afrekenen</Button>
         </div>
       </div>
       <transition-group name="list" tag="div" class="dishes">
@@ -27,6 +28,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Mutation } from 'vuex-class';
 import { Dish } from '@/types';
 import api from '@/utils/api';
 
@@ -44,6 +46,22 @@ import OrderModal from '@/components/OrderModal.vue';
 export default class Dishes extends Vue {
   show = false;
   dishes: Dish[] | null = null;
+
+  @Mutation('clearOrder', { namespace: 'tablet' })
+  clearOrder!: () => void;
+
+  @Mutation('clearHistory', { namespace: 'tablet' })
+  clearHistory!: () => void;
+
+  clear() {
+    this.clearOrder();
+    this.clearHistory();
+
+    this.$toasted.show('Afgerekend! De tablet is opnieuw ingesteld!', {
+      duration: 3000,
+      position: 'top-center'
+    });
+  }
 
   private async fetchDishes() {
     const { data: dishes } = await api.get('/api/dishes');
@@ -115,33 +133,16 @@ export default class Dishes extends Vue {
   .dishes {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+
+    &:after {
+      content: '';
+      flex: auto;
+    }
   }
-}
-
-.blur {
-  filter: blur(0.3rem);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.2s ease-out;
-}
-.list-enter,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(2rem);
 }
 </style>

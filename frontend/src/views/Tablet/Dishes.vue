@@ -157,27 +157,4 @@ export default class Dishes extends Vue {
     }
   }
 }
-
-.blur {
-  filter: blur(0.3rem);
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
-
-.list-enter-active,
-.list-leave-active {
-  transition: all 0.2s ease-out;
-}
-.list-enter,
-.list-leave-to {
-  opacity: 0;
-  transform: translateY(2rem);
-}
 </style>

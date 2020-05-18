@@ -11,9 +11,11 @@
     <div class="message" v-else>
       <h2>U heeft nog geen gerechten toegevoegd</h2>
     </div>
-    <Button :disabled="order.length" class="submit" @click.native="submit()"
-      >Bestelling plaatsen</Button
-    >
+    <Button :disabled="!order.length" class="submit" @click.native="submit()">{{
+      order.length
+        ? `Bestelling voor € ${price.toFixed(2)} plaatsen`
+        : 'Voeg een gerecht toe om te bestellen!'
+    }}</Button>
   </Modal>
 </template>
 
@@ -60,6 +62,10 @@ export default class Dishes extends Vue {
     });
 
     this.$emit('close');
+  }
+
+  get price(): number {
+    return this.order.reduce((a, b) => a + b.price * b.amount, 0);
   }
 }
 </script>

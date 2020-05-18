@@ -9,6 +9,7 @@
     <h1>
       {{ `${dish.prefix}${dish.index}${dish.suffix}. ${dish.name}` }}
     </h1>
+    <h2>€ {{ dish.price.toFixed(2) }}</h2>
     <p>{{ dish.description }}</p>
     <div class="spicyness" v-if="dish.spicyness">
       Pittigheid:

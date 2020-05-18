@@ -8,7 +8,7 @@
     <h1>
       Bestelgeschiedenis
     </h1>
-    <div class="orders">
+    <div class="orders" v-if="history.length">
       <Row
         class="row"
         v-for="(order, index) in history"
@@ -19,6 +19,9 @@
           >Opnieuw bestellen</Button
         >
       </Row>
+    </div>
+    <div class="message" v-else>
+      <h2>U heeft nog geen gerechten toegevoegd</h2>
     </div>
   </div>
 </template>

@@ -4,6 +4,7 @@
     <span class="content">
       {{ dish.name }}
     </span>
+    <span class="price"> € {{ dish.price.toFixed(2) }} </span>
   </div>
 </template>
 
@@ -62,10 +63,22 @@ export default class DishItem extends Vue {
     flex-direction: column;
     justify-content: top;
 
-    overflow: hidden !important;
-
-    height: 4rem;
+    width: 154px;
+    height: 3rem;
     padding: 0.3rem;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+
+    user-select: none;
+  }
+
+  .price {
+    display: flex;
+    flex-direction: row-reverse;
+
+    padding: 0 1rem;
 
     user-select: none;
   }

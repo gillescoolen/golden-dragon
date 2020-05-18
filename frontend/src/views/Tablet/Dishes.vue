@@ -22,11 +22,15 @@
         />
       </transition-group>
     </div>
+    <div class="footer">
+      <Button @click.native="clear()">Reset Tablet</Button>
+    </div>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
+import { Mutation } from 'vuex-class';
 import { Dish } from '@/types';
 import api from '@/utils/api';
 
@@ -44,6 +48,17 @@ import OrderModal from '@/components/OrderModal.vue';
 export default class Dishes extends Vue {
   show = false;
   dishes: Dish[] | null = null;
+
+  @Mutation('clearOrder', { namespace: 'tablet' })
+  clearOrder!: () => void;
+
+  @Mutation('clearHistory', { namespace: 'tablet' })
+  clearHistory!: () => void;
+
+  clear() {
+    this.clearOrder();
+    this.clearHistory();
+  }
 
   private async fetchDishes() {
     const { data: dishes } = await api.get('/api/dishes');
@@ -115,10 +130,31 @@ export default class Dishes extends Vue {
   .dishes {
     margin: 0;
     padding: 0;
+    min-height: 100vh;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
     justify-content: space-between;
+
+    &:after {
+      content: '';
+      flex: auto;
+    }
+  }
+
+  .footer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    padding: 1rem;
+    background-color: white;
+
+    button {
+      width: 100%;
+    }
   }
 }
 

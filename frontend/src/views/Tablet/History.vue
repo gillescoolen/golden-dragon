@@ -14,7 +14,7 @@
         >
       </div>
       <h1>
-        Bestelgeschiedenis
+        Geschiedenis
       </h1>
       <div class="orders" v-if="history.length">
         <Row
@@ -29,7 +29,7 @@
         </Row>
       </div>
       <div class="message" v-else>
-        <h2>U heeft nog geen gerechten toegevoegd</h2>
+        <h2>U heeft nog geen bestellingen geplaatst.</h2>
       </div>
     </div>
   </div>
@@ -96,6 +96,11 @@ export default class History extends Vue {
       align-items: center;
       justify-content: space-between;
     }
+  }
+
+  .message {
+    text-align: center;
+    color: var(--gray);
   }
 }
 </style>

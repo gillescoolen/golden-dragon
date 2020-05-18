@@ -11,6 +11,7 @@
             >Geschiedenis</Button
           >
           <Button @click.native="show = true">Bestelling</Button>
+          <Button @click.native="clear()">Afrekenen</Button>
         </div>
       </div>
       <transition-group name="list" tag="div" class="dishes">
@@ -21,9 +22,6 @@
           @click.native="$router.push(`/tablet/${dish.id}`)"
         />
       </transition-group>
-    </div>
-    <div class="footer">
-      <Button @click.native="clear()">Reset Tablet</Button>
     </div>
   </div>
 </template>
@@ -58,6 +56,11 @@ export default class Dishes extends Vue {
   clear() {
     this.clearOrder();
     this.clearHistory();
+
+    this.$toasted.show('Afgerekend! De tablet is opnieuw ingesteld!', {
+      duration: 3000,
+      position: 'top-center'
+    });
   }
 
   private async fetchDishes() {
@@ -139,21 +142,6 @@ export default class Dishes extends Vue {
     &:after {
       content: '';
       flex: auto;
-    }
-  }
-
-  .footer {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: center;
-
-    width: 100%;
-    padding: 1rem;
-    background-color: white;
-
-    button {
-      width: 100%;
     }
   }
 }

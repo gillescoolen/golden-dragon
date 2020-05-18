@@ -32,8 +32,8 @@ export default class DishItem extends Vue {
   height: var(--size);
   border-radius: 1.1rem;
   background-color: white;
-  box-shadow: 0 0 0.5rem 0 #00000010;
   transition: all 0.3s ease-in-out;
+  box-shadow: 0 0 0.5rem 0 #00000010;
 
   display: flex;
   flex-direction: column;
@@ -47,26 +47,26 @@ export default class DishItem extends Vue {
 
   &:active {
     cursor: pointer;
-    transform: scale(0.95);
     transition: all 0.1s;
+    transform: scale(0.95);
     box-shadow: 0 0.1rem 0.3rem 0 #00000027;
   }
 
   .image {
-    height: 5rem;
+    height: 6rem;
     background-color: #ec054b;
     border-radius: 1rem 1rem 0 0;
   }
 
   .content {
     display: flex;
-    flex-direction: column;
     justify-content: top;
+    flex-direction: column;
 
     width: 154px;
-    height: 3rem;
-    padding: 0.3rem;
+    height: 2rem;
     display: block;
+    padding: 0.3rem;
     overflow: hidden;
     white-space: nowrap;
     text-overflow: ellipsis;

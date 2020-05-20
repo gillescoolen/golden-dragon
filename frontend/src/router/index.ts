@@ -3,6 +3,7 @@ import RegisterLayout from '@/layouts/RegisterLayout.vue';
 import SiteLayout from '@/layouts/SiteLayout.vue';
 import TabletLayout from '@/layouts/TabletLayout.vue';
 import Login from '@/views/Auth/Login.vue';
+import Register from '@/views/Register/Register.vue';
 import Home from '@/views/Site/Home.vue';
 import Dish from '@/views/Tablet/Dish.vue';
 import Dishes from '@/views/Tablet/Dishes.vue';
@@ -33,20 +34,6 @@ const routes: Array<RouteConfig> = [
     meta: { layout: 'site-layout' }
   },
   {
-    path: '/menu',
-    name: 'Menu',
-    meta: { layout: 'site-layout' },
-    component: () =>
-      import(/* webpackChunkName: "site" */ '@/views/Site/Menu.vue')
-  },
-  {
-    path: '/contact',
-    name: 'Contact',
-    meta: { layout: 'site-layout' },
-    component: () =>
-      import(/* webpackChunkName: "site" */ '@/views/Site/Contact.vue')
-  },
-  {
     path: '/login',
     name: 'Login',
     meta: { layout: 'auth-layout' },
@@ -56,8 +43,7 @@ const routes: Array<RouteConfig> = [
     path: '/register',
     name: 'Register',
     meta: { layout: 'register-layout' },
-    component: () =>
-      import(/* webpackChunkName: "register" */ '@/views/Register/Index.vue')
+    component: Register
   },
   {
     path: '/tablet',

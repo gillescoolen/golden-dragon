@@ -1,5 +1,5 @@
 import api from '@/utils/api';
-import { Module, VuexModule, Mutation, Action } from 'vuex-module-decorators';
+import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
 
 @Module({
   namespaced: true
@@ -29,5 +29,9 @@ export default class Auth extends VuexModule {
     const { data: response } = await api.post('/api/login', payload);
 
     return response;
+  }
+
+  get getToken(): string {
+    return this.token;
   }
 }

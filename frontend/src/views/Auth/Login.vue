@@ -52,8 +52,7 @@ export default class Login extends Vue {
   public async login() {
     try {
       await this.authenticate({ id: this.id, password: this.password });
-      this.error = 'Je bent ingelogd!';
-      // todo: send the user to the registry page.
+      this.$router.go(-1);
     } catch (error) {
       this.error = 'Er is iets misgegaan.';
     }

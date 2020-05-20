@@ -14,10 +14,12 @@
 .main {
   display: flex;
   flex-direction: row;
-  background-color: #dde3ee;
+  background: linear-gradient(124deg, var(--primary), var(--secondary));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 100%;
   max-height: 100%;
 
@@ -34,14 +36,5 @@
       box-shadow: 0px 0px 4px 0px #7a7a7a10;
     }
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

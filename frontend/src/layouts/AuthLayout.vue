@@ -15,11 +15,14 @@
   justify-content: center;
   align-items: center;
 
+  background: linear-gradient(124deg, var(--primary), var(--secondary));
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
   max-width: 100%;
   max-height: 100%;
-  background: linear-gradient(124deg, var(--primary), var(--secondary));
 
   .content {
     width: 25rem;
@@ -30,14 +33,5 @@
     background-color: white;
     box-shadow: 0 0 0.5rem 0 #00000010;
   }
-}
-
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.2s;
-}
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
 }
 </style>

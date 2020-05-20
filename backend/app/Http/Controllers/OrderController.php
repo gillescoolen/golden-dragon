@@ -14,7 +14,7 @@ class OrderController extends Controller
 
     public function single($id)
     {
-        return Order::where('id', '=', $id)->with('allergies')->first();
+        return Order::where('id', '=', $id)->with('dishes')->first();
     }
 
     public function create(Request $request)

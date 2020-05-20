@@ -7,7 +7,7 @@
       <div class="header">
         <h1>Gerechten</h1>
         <div class="buttons">
-          <Button @click.native="$router.push('/tablet/history')"
+          <Button @click.native="$router.push({ name: 'History' })"
             >Geschiedenis</Button
           >
           <Button @click.native="show = true">Bestelling</Button>
@@ -16,10 +16,11 @@
       </div>
       <transition-group name="list" tag="div" class="dishes">
         <DishItem
+          mode="tile"
           v-for="dish in dishes"
           :key="dish.id"
           :dish="dish"
-          @click.native="$router.push(`/tablet/${dish.id}`)"
+          @click.native="$router.push({ name: 'Dish' })"
         />
       </transition-group>
     </div>
@@ -32,9 +33,9 @@ import { Mutation } from 'vuex-class';
 import { Dish } from '@/types';
 import api from '@/utils/api';
 
-import Button from '@/components/Button.vue';
-import DishItem from '@/components/DishItem.vue';
-import OrderModal from '@/components/OrderModal.vue';
+import Button from '@/components/UI/Button.vue';
+import DishItem from '@/components/UI/DishItem.vue';
+import OrderModal from '@/components/Tablet/OrderModal.vue';
 
 @Component({
   components: {

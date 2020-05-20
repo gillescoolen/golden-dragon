@@ -16,7 +16,7 @@ export default class Auth extends VuexModule {
      * use our freshly gained token.
      */
     api.defaults.headers = {
-      Authorization: this.token
+      Authorization: `Bearer ${this.token}`
     };
   }
 
@@ -29,6 +29,16 @@ export default class Auth extends VuexModule {
     const { data: response } = await api.post('/api/login', payload);
 
     return response;
+  }
+
+  /**
+   * Log the user out of the application.
+   * Revokes all tokens in the backend.
+   */
+  @Action({ commit: 'setToken' })
+  async logout() {
+    await api.post('/api/logout');
+    return '';
   }
 
   get getToken(): string {

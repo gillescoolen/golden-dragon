@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper">
+  <div class="input-wrapper">
     <input
       class="input"
       @input="input"
@@ -42,7 +42,7 @@ export default class Input extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.wrapper {
+.input-wrapper {
   width: 100%;
   margin-top: 1rem;
   padding: 1rem 0 0;

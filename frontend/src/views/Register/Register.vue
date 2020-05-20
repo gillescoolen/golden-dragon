@@ -1,32 +1,47 @@
 <template>
   <div class="register">
-    <div class="categories">
+    <div class="container categories">
       <div class="category" v-for="category in categories" :key="category.name">
         <h1>{{ category.name }}</h1>
         <div class="dishes">
-          <DishItem
+          <Row
+            class="row"
             v-for="dish in category.dishes"
             :key="dish.id"
-            :dish="dish"
-            @click.native="addDish(dish)"
-          />
+            :name="dish.name"
+          >
+            <span class="price">€ {{ dish.price.toFixed(2) }}</span>
+            <Button small="true" @click.native="addDish(dish)">Meer!</Button>
+          </Row>
         </div>
       </div>
     </div>
-    <div class="order">
-      Orders
-      <Row class="row" v-for="dish in order" :key="dish.id" :name="dish.name">
-        <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
-        <span class="amount">{{ dish.amount }}</span>
-        <Button small="true" @click.native="addDish(dish)">Meer!</Button>
-      </Row>
-      Totaal € {{ price.toFixed(2) }}
-      <Button :disabled="!order.length" @click.native="submit()"
-        >Afrekenen
-      </Button>
-      <Button :disabled="!order.length" @click.native="clear()"
-        >Verwijderen
-      </Button>
+    <div class="container order">
+      <h1>Bestelling</h1>
+      <transition-group name="list-complete" tag="div" class="dishes">
+        <Row
+          class="row  list-complete-item"
+          v-for="dish in order"
+          :key="dish.id"
+          :name="dish.name"
+        >
+          <span class="price"
+            >€ {{ (dish.price * dish.amount).toFixed(2) }}</span
+          >
+          <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
+          <span class="amount">{{ dish.amount }}</span>
+          <Button small="true" @click.native="addDish(dish)">Meer!</Button>
+        </Row>
+      </transition-group>
+      <div class="footer">
+        Totaal € {{ price.toFixed(2) }}
+        <Button :disabled="!order.length" @click.native="submit()"
+          >Afrekenen
+        </Button>
+        <Button :disabled="!order.length" @click.native="clear()"
+          >Verwijderen
+        </Button>
+      </div>
     </div>
   </div>
 </template>
@@ -35,10 +50,10 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Category, Dish } from '@/types';
 
-import Row from '@/components/Row.vue';
-import DishItem from '@/components/DishItem.vue';
-import Button from '@/components/Button.vue';
 import api from '@/utils/api';
+import Row from '@/components/UI/Row.vue';
+import Button from '@/components/UI/Button.vue';
+import DishItem from '@/components/UI/DishItem.vue';
 
 @Component({
   components: {
@@ -84,8 +99,6 @@ export default class Register extends Vue {
       duration: 1000,
       position: 'top-center'
     });
-
-    this.$emit('close');
   }
 
   get price(): number {
@@ -100,43 +113,87 @@ export default class Register extends Vue {
 
 <style lang="scss" scoped>
 .register {
+  width: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
 
+  .container {
+    width: 100%;
+    padding: 2rem;
+    border-radius: 15px;
+    background-color: #ffffff;
+    height: calc(100vh - 7.5rem);
+    box-shadow: 0px 0px 4px 0px #7a7a7a10;
+  }
+
   .categories {
-    width: 49%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    overflow-y: scroll;
+    margin-right: 0.5rem;
 
     .dishes {
       margin: 0;
       padding: 0;
       display: flex;
       flex-wrap: wrap;
-      flex-direction: row;
-      justify-content: space-between;
-
-      &:after {
-        content: '';
-        flex: auto;
-      }
+      flex-direction: column;
     }
   }
 
   .order {
-    width: 49%;
+    width: 100%;
 
-    .amount {
-      text-align: center;
-      width: 4rem;
-      font-size: 1.3rem;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    margin-left: 0.5rem;
+
+    h1 {
+      margin-top: 0;
     }
 
-    button {
-      width: 6rem;
+    .dishes {
+      width: 100%;
+      flex-grow: 1;
+      overflow-y: auto;
+
+      .amount {
+        width: 4rem;
+        text-align: center;
+        font-size: 1.3rem;
+      }
+
+      button {
+        width: 6rem;
+      }
+    }
+
+    .footer {
+      width: 100%;
+      display: flex;
+      margin-top: 1rem;
+      align-items: center;
+      flex-direction: row;
+      justify-content: space-between;
     }
   }
+}
+
+.row {
+  transition: all 0.2s;
+
+  .price {
+    width: 5rem;
+  }
+}
+.list-complete-enter,
+.list-complete-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.list-complete-leave-active {
+  display: none;
 }
 </style>

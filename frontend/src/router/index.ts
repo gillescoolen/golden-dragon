@@ -1,9 +1,10 @@
-import AuthLayout from '@/layouts/AuthLayout.vue';
 import RegisterLayout from '@/layouts/RegisterLayout.vue';
 import SiteLayout from '@/layouts/SiteLayout.vue';
 import TabletLayout from '@/layouts/TabletLayout.vue';
 import Login from '@/views/Auth/Login.vue';
+import Overview from '@/views/Register/Overview.vue';
 import Register from '@/views/Register/Register.vue';
+import Sales from '@/views/Register/Sales.vue';
 import Home from '@/views/Site/Home.vue';
 import Dish from '@/views/Tablet/Dish.vue';
 import Dishes from '@/views/Tablet/Dishes.vue';
@@ -13,19 +14,9 @@ import VueRouter, { RouteConfig } from 'vue-router';
 
 Vue.use(VueRouter);
 Vue.component('site-layout', SiteLayout);
-Vue.component('auth-layout', AuthLayout);
 Vue.component('tablet-layout', TabletLayout);
 Vue.component('register-layout', RegisterLayout);
 
-/**
- * The config for the vue-router.
- * Whenever you see the following code:
- *
- * component: () =>
- *    import(/* webpackChunkName: "site" / '@/views/Site/Menu.vue')
- *
- * It means we lazyload the route whenever the user navigates to said route.
- */
 const routes: Array<RouteConfig> = [
   {
     path: '/',
@@ -36,7 +27,7 @@ const routes: Array<RouteConfig> = [
   {
     path: '/login',
     name: 'Login',
-    meta: { layout: 'auth-layout' },
+    meta: { layout: 'register-layout' },
     component: Login
   },
   {
@@ -44,6 +35,18 @@ const routes: Array<RouteConfig> = [
     name: 'Register',
     meta: { layout: 'register-layout' },
     component: Register
+  },
+  {
+    path: '/sales',
+    name: 'Sales',
+    meta: { layout: 'register-layout' },
+    component: Sales
+  },
+  {
+    path: '/overview',
+    name: 'Overview',
+    meta: { layout: 'register-layout' },
+    component: Overview
   },
   {
     path: '/tablet',
@@ -62,6 +65,12 @@ const routes: Array<RouteConfig> = [
     name: 'Dish',
     meta: { layout: 'tablet-layout' },
     component: Dish
+  },
+  {
+    path: '*',
+    name: 'NotFound',
+    component: Home,
+    meta: { layout: 'site-layout' }
   }
 ];
 

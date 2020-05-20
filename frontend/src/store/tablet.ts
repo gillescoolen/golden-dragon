@@ -57,7 +57,12 @@ export default class Tablet extends VuexModule {
    */
   @Mutation
   addOrder(dishes: Dish[]) {
-    this.orders.push({ dishes });
+    this.orders.push({
+      id: this.orders.length,
+      comment: '',
+      date: new Date(),
+      dishes
+    });
   }
 
   @Action({ commit: 'addOrder', rawError: true })

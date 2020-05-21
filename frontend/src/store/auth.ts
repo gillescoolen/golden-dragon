@@ -37,7 +37,11 @@ export default class Auth extends VuexModule {
    */
   @Action({ commit: 'setToken' })
   async logout() {
-    await api.post('/api/logout');
+    try {
+      await api.post('/api/logout');
+    } catch (error) {
+      return '';
+    }
     return '';
   }
 

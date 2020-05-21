@@ -66,7 +66,7 @@ export default class Login extends Vue {
 <style lang="scss" scoped>
 .wrapper {
   width: 100%;
-  height: 100vh;
+  height: 90vh;
   display: flex;
   align-items: center;
   justify-content: center;

@@ -8,7 +8,7 @@
             class="row"
             v-for="dish in category.dishes"
             :key="dish.id"
-            :name="dish.name"
+            :name="getDishName(dish)"
           >
             <span class="price">€ {{ dish.price.toFixed(2) }}</span>
             <Button small="true" @click.native="addDish(dish)">Meer!</Button>
@@ -23,7 +23,7 @@
           class="row  list-complete-item"
           v-for="dish in order"
           :key="dish.id"
-          :name="dish.name"
+          :name="getDishName(dish)"
         >
           <span class="price"
             >€ {{ (dish.price * dish.amount).toFixed(2) }}</span
@@ -34,12 +34,12 @@
         </Row>
       </transition-group>
       <div class="footer">
-        Totaal € {{ price.toFixed(2) }}
-        <Button :disabled="!order.length" @click.native="submit()"
-          >Afrekenen
+        <Button :disabled="!order.length" @click.native="clear()">
+          Verwijderen
         </Button>
-        <Button :disabled="!order.length" @click.native="clear()"
-          >Verwijderen
+        <h2>Totaal € {{ price.toFixed(2) }}</h2>
+        <Button :disabled="!order.length" @click.native="submit()">
+          Afrekenen
         </Button>
       </div>
     </div>
@@ -99,6 +99,10 @@ export default class Register extends Vue {
       duration: 1000,
       position: 'top-center'
     });
+  }
+
+  getDishName(dish: Dish) {
+    return `${dish.prefix}${dish.index}${dish.suffix}. ${dish.name}`;
   }
 
   get price(): number {
@@ -177,6 +181,10 @@ export default class Register extends Vue {
       align-items: center;
       flex-direction: row;
       justify-content: space-between;
+
+      h2 {
+        margin: none;
+      }
     }
   }
 }

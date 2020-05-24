@@ -25,7 +25,7 @@ export default class Input extends Vue {
   token!: string;
 
   private check() {
-    !this.token && this.$router.push({ name: 'Login' });
+    !this.token && this.$router.push({ name: 'login' });
   }
 
   created() {

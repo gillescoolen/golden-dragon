@@ -9,7 +9,7 @@
     </transition>
     <div :class="{ blur: selected }" class="history">
       <div class="header">
-        <Button :small="true" @click.native="$router.push({ name: 'Tablet' })"
+        <Button :small="true" @click.native="$router.push({ name: 'tablet' })"
           >Terug</Button
         >
       </div>
@@ -68,7 +68,7 @@ export default class History extends Vue {
 
     this.submitOrder(order.dishes);
 
-    this.$router.push({ name: 'Tablet' });
+    this.$router.push({ name: 'tablet' });
   }
 }
 </script>

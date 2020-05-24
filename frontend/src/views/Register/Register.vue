@@ -1,21 +1,30 @@
 <template>
   <div class="register">
-    <div class="container categories">
-      <div class="category" v-for="category in categories" :key="category.name">
-        <h1>{{ category.name }}</h1>
-        <div class="dishes">
-          <Row
-            class="row"
-            v-for="dish in category.dishes"
-            :key="dish.id"
-            :name="getDishName(dish)"
-          >
-            <span class="price">€ {{ dish.price.toFixed(2) }}</span>
-            <Button small="true" @click.native="addDish(dish)">Meer!</Button>
-          </Row>
+    <transition name="fade" mode="out-in">
+      <div v-if="categories.length" class="container categories">
+        <div
+          class="category"
+          v-for="category in categories"
+          :key="category.name"
+        >
+          <h1>{{ category.name }}</h1>
+          <div class="dishes">
+            <Row
+              class="row"
+              v-for="dish in category.dishes"
+              :key="dish.id"
+              :name="getDishName(dish)"
+              :description="dish.description"
+            >
+              <span class="price">€ {{ dish.price.toFixed(2) }}</span>
+              <Button small="true" @click.native="addDish(dish)">
+                Toevoegen!
+              </Button>
+            </Row>
+          </div>
         </div>
       </div>
-    </div>
+    </transition>
     <div class="container order">
       <h1>Bestelling</h1>
       <transition-group name="list-complete" tag="div" class="dishes">
@@ -49,8 +58,8 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import { Category, Dish } from '@/types';
-
 import api from '@/utils/api';
+
 import Row from '@/components/UI/Row.vue';
 import Button from '@/components/UI/Button.vue';
 import DishItem from '@/components/UI/DishItem.vue';

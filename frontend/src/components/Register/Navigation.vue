@@ -25,7 +25,7 @@ export default class Navigation extends Vue {
   async logout() {
     this.logoutAction();
 
-    this.$router.push({ name: 'Login' });
+    this.$router.push({ name: 'login' });
   }
 }
 </script>

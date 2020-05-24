@@ -12,14 +12,23 @@
         v-for="dish in existingOrder.dishes"
         :key="dish.id"
         :name="dish.name"
+        :description="dish.description"
       >
+        <span class="price">€ {{ (dish.price * dish.amount).toFixed(2) }}</span>
         <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
         <span class="amount">{{ dish.amount }}</span>
         <Button small="true" @click.native="addDish(dish)">Meer!</Button>
       </Row>
     </div>
     <div class="ordered-dishes" v-else-if="order.length">
-      <Row class="row" v-for="dish in order" :key="dish.id" :name="dish.name">
+      <Row
+        class="row"
+        v-for="dish in order"
+        :key="dish.id"
+        :name="dish.name"
+        :description="dish.description"
+      >
+        <span class="price">€ {{ (dish.price * dish.amount).toFixed(2) }}</span>
         <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
         <span class="amount">{{ dish.amount }}</span>
         <Button small="true" @click.native="addDish(dish)">Meer!</Button>
@@ -113,12 +122,16 @@ export default class OrderModal extends Vue {
 
   .ordered-dishes {
     flex-grow: 1;
-    overflow-y: scroll;
+    overflow-y: auto;
 
     .amount {
       text-align: center;
       width: 4rem;
       font-size: 1.3rem;
+    }
+
+    .price {
+      margin: 0 1rem;
     }
 
     button {

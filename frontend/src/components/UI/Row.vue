@@ -1,6 +1,9 @@
 <template>
   <div class="row">
-    <h3>{{ name }}</h3>
+    <div>
+      <h3>{{ name }}</h3>
+      <i v-if="description">{{ description }}</i>
+    </div>
     <div class="side">
       <slot />
     </div>
@@ -19,6 +22,9 @@ import Button from '@/components/UI/Button.vue';
 export default class Row extends Vue {
   @Prop()
   name!: string;
+
+  @Prop()
+  description!: string;
 }
 </script>
 
@@ -37,7 +43,6 @@ export default class Row extends Vue {
 
   h3 {
     margin: 0;
-    width: 70%;
   }
 
   .side {

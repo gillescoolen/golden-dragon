@@ -7,7 +7,7 @@
       <div class="header">
         <h1>Gerechten</h1>
         <div class="buttons">
-          <Button @click.native="$router.push({ name: 'History' })"
+          <Button @click.native="$router.push({ name: 'history' })"
             >Geschiedenis</Button
           >
           <Button @click.native="show = true">Bestelling</Button>
@@ -21,7 +21,7 @@
           :key="dish.id"
           :dish="dish"
           @click.native="
-            $router.push({ name: 'Dish', params: { id: dish.id } })
+            $router.push({ name: 'dish', params: { id: dish.id } })
           "
         />
       </transition-group>

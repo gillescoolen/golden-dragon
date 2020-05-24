@@ -39,6 +39,15 @@ export default class App extends Vue {
   font-family: 'Jost';
   src: url('assets/fonts/jost.ttf');
 }
+
+@font-face {
+  font-family: 'chinese_takeawayregular';
+  src: url('assets/fonts/chinesetakeaway-webfont.woff2') format('woff2'),
+    url('assets/fonts/chinesetakeaway-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
 :root {
   --primary: #dd4d4d;
   --secondary: #dd7748;
@@ -49,12 +58,12 @@ export default class App extends Vue {
 * {
   font-weight: normal;
   box-sizing: border-box;
-  font-family: 'Jost', Arial, Helvetica, sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
+  font-family: 'Jost', Arial, Helvetica, sans-serif;
 }
 
 .blur {

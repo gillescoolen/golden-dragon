@@ -1,36 +1,40 @@
 <template>
-  <form @submit.prevent="login">
-    <div>
-      <h1>Inloggen</h1>
-      <span class="error">{{ error }}</span>
-      <Input
-        v-model="id"
-        label="Werknemersnummer"
-        type="number"
-        name="id"
-        :required="true"
-      />
-      <Input
-        v-model="password"
-        label="Wachtwoord"
-        type="password"
-        name="password"
-        :required="true"
-      />
-    </div>
+  <div class="wrapper">
+    <div class="content">
+      <form @submit.prevent="login">
+        <div>
+          <h1>Inloggen</h1>
+          <span class="error">{{ error }}</span>
+          <Input
+            v-model="id"
+            label="Werknemersnummer"
+            type="number"
+            name="id"
+            :required="true"
+          />
+          <Input
+            v-model="password"
+            label="Wachtwoord"
+            type="password"
+            name="password"
+            :required="true"
+          />
+        </div>
 
-    <div>
-      <Button type="submit">Inloggen</Button>
+        <div>
+          <Button type="submit">Inloggen</Button>
+        </div>
+      </form>
     </div>
-  </form>
+  </div>
 </template>
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 
-import Input from '@/components/Input.vue';
-import Button from '@/components/Button.vue';
 import { Action } from 'vuex-class';
 import { AuthenticationPayload } from '@/types';
+import Input from '@/components/UI/Input.vue';
+import Button from '@/components/UI/Button.vue';
 
 @Component({
   components: {
@@ -52,8 +56,7 @@ export default class Login extends Vue {
   public async login() {
     try {
       await this.authenticate({ id: this.id, password: this.password });
-      this.error = 'Je bent ingelogd!';
-      // todo: send the user to the registry page.
+      this.$router.push({ name: 'Register' });
     } catch (error) {
       this.error = 'Er is iets misgegaan.';
     }
@@ -61,31 +64,49 @@ export default class Login extends Vue {
 }
 </script>
 <style lang="scss" scoped>
-form {
-  height: 100%;
-
+.wrapper {
+  width: 100%;
+  height: 90vh;
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  align-items: center;
+  justify-content: center;
 
-  .error {
-    margin-top: 1rem;
-    color: var(--error);
-  }
+  .content {
+    width: 25rem;
+    margin: 1rem;
+    padding: 2rem;
+    height: 25rem;
+    border-radius: 1rem;
+    background-color: white;
+    box-shadow: 0 0 0.5rem 0 #00000010;
 
-  div {
-    display: flex;
-    text-align: center;
-    flex-direction: column;
+    form {
+      height: 100%;
 
-    h1 {
-      margin: 0;
-    }
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
 
-    a {
-      margin-top: 0.3rem;
-      color: var(--primary);
-      text-decoration: none;
+      .error {
+        margin-top: 1rem;
+        color: var(--error);
+      }
+
+      div {
+        display: flex;
+        text-align: center;
+        flex-direction: column;
+
+        h1 {
+          margin: 0;
+        }
+
+        a {
+          margin-top: 0.3rem;
+          color: var(--primary);
+          text-decoration: none;
+        }
+      }
     }
   }
 }

@@ -9,7 +9,7 @@
     </transition>
     <div :class="{ blur: selected }" class="history">
       <div class="header">
-        <Button :small="true" @click.native="$router.push('/tablet')"
+        <Button :small="true" @click.native="$router.push({ name: 'Tablet' })"
           >Terug</Button
         >
       </div>
@@ -40,9 +40,9 @@ import { Component, Vue } from 'vue-property-decorator';
 import { Getter, Action } from 'vuex-class';
 import { Dish, Order } from '../../types';
 
-import Row from '@/components/Row.vue';
-import Button from '@/components/Button.vue';
-import OrderModal from '@/components/OrderModal.vue';
+import Row from '@/components/UI/Row.vue';
+import Button from '@/components/UI/Button.vue';
+import OrderModal from '@/components/Tablet/OrderModal.vue';
 
 @Component({
   components: {
@@ -68,7 +68,7 @@ export default class History extends Vue {
 
     this.submitOrder(order.dishes);
 
-    this.$router.push('/tablet');
+    this.$router.push({ name: 'Tablet' });
   }
 }
 </script>

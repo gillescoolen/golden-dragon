@@ -10,7 +10,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import { Dish } from '../types';
+import { Dish } from '@/types';
 
 @Component
 export default class DishItem extends Vue {

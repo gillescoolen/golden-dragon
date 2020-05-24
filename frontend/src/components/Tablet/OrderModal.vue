@@ -54,9 +54,9 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 import { Getter, Action, Mutation } from 'vuex-class';
 import { Dish, Order } from '@/types';
 
-import Row from '@/components/Row.vue';
-import Modal from '@/components/Modal.vue';
-import Button from '@/components/Button.vue';
+import Row from '@/components/UI/Row.vue';
+import Modal from '@/components/UI/Modal.vue';
+import Button from '@/components/UI/Button.vue';
 
 @Component({
   components: {

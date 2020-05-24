@@ -20,7 +20,9 @@
           v-for="dish in dishes"
           :key="dish.id"
           :dish="dish"
-          @click.native="$router.push({ name: 'Dish' })"
+          @click.native="
+            $router.push({ name: 'Dish', params: { id: dish.id } })
+          "
         />
       </transition-group>
     </div>

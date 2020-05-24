@@ -148,27 +148,29 @@
                     >De Gouden Draak</span
                   ><br />
                 </p>
-                <p>
-                  <table style="margin:auto;font-size:20px;color:white" border="1px solid white">
-										<tr class="gradient" background="/img/menu_bg_gradient.png">
-											<td valign="middle">
-												<router-link to="Menu" style="color:white">
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menukaart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</router-link>
-											</td>
-											<td valign="middle">
-												<router-link to="News" style="color:white">
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nieuws&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</router-link>
-											</td>
-											<td valign="middle">
-												<router-link to="Contact" style="color:white">
-													&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-												</router-link>
-											</td>
-										</tr>
-									</table>
-                </p>
+                <p></p>
+                <table
+                  style="margin:auto;font-size:20px;color:white"
+                  border="1px solid white"
+                >
+                  <tr class="gradient" background="/img/menu_bg_gradient.png">
+                    <td valign="middle">
+                      <router-link to="Menu" style="color:white">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Menukaart&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </router-link>
+                    </td>
+                    <td valign="middle">
+                      <router-link to="News" style="color:white">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Nieuws&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </router-link>
+                    </td>
+                    <td valign="middle">
+                      <router-link to="Contact" style="color:white">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </router-link>
+                    </td>
+                  </tr>
+                </table>
               </td>
             </tr>
             <tr style="padding-top:50px">
@@ -180,7 +182,7 @@
                 align="center"
                 style="font-size:5;border:1px solid black;background:floralwhite"
               >
-                <slot/>
+                <slot />
               </td>
               <td width="50px"></td>
             </tr>
@@ -288,7 +290,7 @@ body {
     font-weight: bold;
   }
   .gradient {
-    background: linear-gradient(to bottom, #00f4ff 0%, #004CFF 100%);
+    background: linear-gradient(to bottom, #00f4ff 0%, #004cff 100%);
 
     td {
       width: 11rem;

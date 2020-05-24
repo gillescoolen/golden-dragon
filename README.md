@@ -56,8 +56,9 @@ Als klant wil ik via de website een afhaal bestelling doorgeven. Bij de bedanktp
 
 ## Admin
 
-### 4.1
-Als admin kan ik gerechten toevoegen, aanpassen en verwijderen zodat het menu up-to-date gehouden kan worden. De nummering moet wel gelijk blijven. Je zal dus met a,b,c moeten werken bij huidige. Bij echt nieuwe gerechten/categorie kan de nummering doorlopen
-
 ### 4.2
 Het menu wordt automatisch gegenereerd op de verschillende webpaginas vanuit de informatie in de database zodat alle menu informatie op alle plekken consistent is.
+
+### 4.3
+Als admin kan ik medewerkers met toegangsrechten toevoegen, aanpassen, en verwijderen zodat de toegang tot mijn site geregeld is 
+- de rechten die minimaal aanwezig moeten zijn: klant (geen rechten), kassamedewerker, serveerster, admin 

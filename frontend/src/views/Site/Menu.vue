@@ -38,7 +38,7 @@ import autoTable from 'jspdf-autotable';
 import jsPDF from 'jspdf';
 
 @Component
-export default class Dishes extends Vue {
+export default class Menu extends Vue {
   categories: Dish[] | null = null;
 
   generatePDF() {

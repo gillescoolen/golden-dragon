@@ -9,6 +9,7 @@ import Contact from '@/views/Site/Contact.vue';
 import Home from '@/views/Site/Home.vue';
 import Menu from '@/views/Site/Menu.vue';
 import News from '@/views/Site/News.vue';
+import Order from '@/views/Site/Order.vue';
 import Dish from '@/views/Tablet/Dish.vue';
 import Dishes from '@/views/Tablet/Dishes.vue';
 import History from '@/views/Tablet/History.vue';
@@ -23,73 +24,79 @@ Vue.component('register-layout', RegisterLayout);
 const routes: Array<RouteConfig> = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: Home,
     meta: { layout: 'site-layout' }
   },
   {
     path: '/menu',
-    name: 'Menu',
+    name: 'menu',
     component: Menu,
     meta: { layout: 'site-layout' }
   },
   {
     path: '/news',
-    name: 'News',
+    name: 'news',
     component: News,
     meta: { layout: 'site-layout' }
   },
   {
     path: '/contact',
-    name: 'Contact',
+    name: 'contact',
     component: Contact,
     meta: { layout: 'site-layout' }
   },
   {
+    path: '/order',
+    name: 'order',
+    component: Order,
+    meta: { layout: 'site-layout' }
+  },
+  {
     path: '/login',
-    name: 'Login',
+    name: 'login',
     meta: { layout: 'register-layout' },
     component: Login
   },
   {
     path: '/register',
-    name: 'Register',
+    name: 'register',
     meta: { layout: 'register-layout' },
     component: Register
   },
   {
     path: '/sales',
-    name: 'Sales',
+    name: 'sales',
     meta: { layout: 'register-layout' },
     component: Sales
   },
   {
     path: '/overview',
-    name: 'Overview',
+    name: 'overview',
     meta: { layout: 'register-layout' },
     component: Overview
   },
   {
     path: '/tablet',
-    name: 'Tablet',
+    name: 'tablet',
     meta: { layout: 'tablet-layout' },
     component: Dishes
   },
   {
     path: '/tablet/history',
-    name: 'History',
+    name: 'history',
     meta: { layout: 'tablet-layout' },
     component: History
   },
   {
     path: '/tablet/:id',
-    name: 'Dish',
+    name: 'dish',
     meta: { layout: 'tablet-layout' },
     component: Dish
   },
   {
     path: '*',
-    name: 'NotFound',
+    name: 'not-found',
     component: Home,
     meta: { layout: 'site-layout' }
   }

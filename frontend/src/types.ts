@@ -13,6 +13,9 @@ export type Dish = {
 };
 
 export type Order = {
+  id: number;
+  date: Date;
+  comment: string;
   dishes: Dish[];
 };
 
@@ -23,4 +26,9 @@ export type Allergy = {
 export type AuthenticationPayload = {
   id: number;
   password: string;
+};
+
+export type Category = {
+  name: string;
+  dishes: Dish[];
 };

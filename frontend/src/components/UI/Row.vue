@@ -9,7 +9,7 @@
 
 <script lang="ts">
 import { Component, Vue, Prop } from 'vue-property-decorator';
-import Button from '@/components/Button.vue';
+import Button from '@/components/UI/Button.vue';
 
 @Component({
   components: {
@@ -28,13 +28,16 @@ export default class Row extends Vue {
   align-items: center;
   flex-direction: row;
   justify-content: space-between;
+
   border-bottom: 1px solid var(--gray);
   border-image: linear-gradient(to right, var(--primary), var(--secondary));
   border-image-slice: 1;
 
+  min-height: 3rem;
+
   h3 {
-    margin: none;
-    width: 15rem;
+    margin: 0;
+    width: 70%;
   }
 
   .side {
@@ -42,6 +45,10 @@ export default class Row extends Vue {
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+  }
+
+  &:last-child {
+    border: none;
   }
 }
 </style>

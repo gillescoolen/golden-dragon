@@ -21,9 +21,7 @@ export default class App extends Vue {
      * constructing this component.
      */
     this.layout = this.$route.meta.layout;
-  }
 
-  mounted() {
     /**
      * Request the laravel CSRF token.
      * We don't have it by default because

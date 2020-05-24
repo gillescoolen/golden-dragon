@@ -31,7 +31,7 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Mutation } from 'vuex-class';
 import { Dish } from '../../types';
-import Button from '@/components/Button.vue';
+import Button from '@/components/UI/Button.vue';
 import api from '../../utils/api';
 
 @Component({
@@ -51,7 +51,7 @@ export default class Single extends Vue {
       position: 'top-center'
     });
     this.addDish(dish);
-    this.$router.push('/tablet');
+    this.$router.push({ name: 'Tablet' });
   }
 
   async created() {

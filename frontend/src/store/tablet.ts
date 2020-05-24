@@ -6,7 +6,7 @@ import api from '../utils/api';
   namespaced: true
 })
 export default class Tablet extends VuexModule {
-  dishes: Dish[] = [];
+  order: Dish[] = [];
   orders: Order[] = [];
 
   /**
@@ -18,11 +18,11 @@ export default class Tablet extends VuexModule {
    */
   @Mutation
   addDish(dish: Dish) {
-    const index = this.dishes.findIndex(item => item.id === dish.id);
+    const index = this.order.findIndex(item => item.id === dish.id);
 
     index != -1
-      ? this.dishes[index].amount++
-      : this.dishes.push({ ...dish, amount: 1 });
+      ? this.order[index].amount++
+      : this.order.push({ ...dish, amount: 1 });
   }
 
   /**
@@ -34,17 +34,15 @@ export default class Tablet extends VuexModule {
    */
   @Mutation
   removeDish(dish: Dish) {
-    const index = this.dishes.findIndex(item => item.id === dish.id);
-    const item = this.dishes[index];
+    const index = this.order.findIndex(item => item.id === dish.id);
+    const item = this.order[index];
 
-    item.amount > 1
-      ? this.dishes[index].amount--
-      : this.dishes.splice(index, 1);
+    item.amount > 1 ? this.order[index].amount-- : this.order.splice(index, 1);
   }
 
   @Mutation
   clearOrder() {
-    this.dishes = [];
+    this.order = [];
   }
 
   @Mutation
@@ -59,7 +57,12 @@ export default class Tablet extends VuexModule {
    */
   @Mutation
   addOrder(dishes: Dish[]) {
-    this.orders.push({ dishes });
+    this.orders.push({
+      id: this.orders.length,
+      comment: '',
+      date: new Date(),
+      dishes
+    });
   }
 
   @Action({ commit: 'addOrder', rawError: true })
@@ -70,7 +73,7 @@ export default class Tablet extends VuexModule {
   }
 
   get getOrder(): Dish[] {
-    return this.dishes;
+    return this.order;
   }
 
   get getHistory(): Order[] {

@@ -2,10 +2,13 @@ import RegisterLayout from '@/layouts/RegisterLayout.vue';
 import SiteLayout from '@/layouts/SiteLayout.vue';
 import TabletLayout from '@/layouts/TabletLayout.vue';
 import Login from '@/views/Auth/Login.vue';
+import Contact from '@/views/Site/Contact.vue';
 import Overview from '@/views/Register/Overview.vue';
 import Register from '@/views/Register/Register.vue';
 import Sales from '@/views/Register/Sales.vue';
 import Home from '@/views/Site/Home.vue';
+import Menu from '@/views/Site/Menu.vue';
+import News from '@/views/Site/News.vue';
 import Dish from '@/views/Tablet/Dish.vue';
 import Dishes from '@/views/Tablet/Dishes.vue';
 import History from '@/views/Tablet/History.vue';
@@ -22,6 +25,24 @@ const routes: Array<RouteConfig> = [
     path: '/',
     name: 'Home',
     component: Home,
+    meta: { layout: 'site-layout' }
+  },
+  {
+    path: '/menu',
+    name: 'Menu',
+    component: Menu,
+    meta: { layout: 'site-layout' }
+  },
+  {
+    path: '/news',
+    name: 'News',
+    component: News,
+    meta: { layout: 'site-layout' }
+  },
+  {
+    path: '/contact',
+    name: 'Contact',
+    component: Contact,
     meta: { layout: 'site-layout' }
   },
   {

@@ -288,7 +288,7 @@ body {
     font-weight: bold;
   }
   .gradient {
-    background: linear-gradient(to bottom, #00f4ff 0%, #0053ff 100%);
+    background: linear-gradient(to bottom, #00f4ff 0%, #004CFF 100%);
 
     td {
       width: 11rem;

@@ -169,6 +169,11 @@
                         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Contact&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                       </router-link>
                     </td>
+                    <td valign="middle">
+                      <router-link to="Order" style="color:white">
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Bestellen&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      </router-link>
+                    </td>
                   </tr>
                 </table>
               </td>

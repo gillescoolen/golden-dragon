@@ -15,6 +15,8 @@ class CreateUsersTable extends Migration
     {
         Schema::create('users', function (Blueprint $table) {
             $table->id();
+            $table->string('role')->default('klant');
+            $table->foreign('role')->references('role')->on('roles');
             $table->string('password');
         });
     }

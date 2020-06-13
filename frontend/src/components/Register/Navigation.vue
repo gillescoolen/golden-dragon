@@ -3,6 +3,9 @@
     <router-link to="/register">Kassa</router-link>
     <router-link to="/overview">Gerechten</router-link>
     <router-link to="/sales">Verkoop Overzicht</router-link>
+    <router-link v-if="this.role === 'admin'" to="/users">
+      Gebruikers
+    </router-link>
     <Button @click.native="logout">Log uit</Button>
   </div>
 </template>
@@ -11,7 +14,8 @@
 import { Component, Vue } from 'vue-property-decorator';
 
 import Button from '@/components/UI/Button.vue';
-import { Action } from 'vuex-class';
+import { Action, Getter } from 'vuex-class';
+import { Role } from '../../types';
 
 @Component({
   components: {
@@ -19,6 +23,9 @@ import { Action } from 'vuex-class';
   }
 })
 export default class Navigation extends Vue {
+  @Getter('getRole', { namespace: 'auth' })
+  role!: Role;
+
   @Action('logout', { namespace: 'auth' })
   logoutAction!: () => void;
 

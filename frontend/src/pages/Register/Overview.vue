@@ -31,7 +31,7 @@ import Row from '@/components/UI/Row.vue';
   }
 })
 export default class Overview extends Vue {
-  categories: Category[] | null = null;
+  categories: Category[] = [];
 
   private async fetchCategories() {
     const { data: categories } = await api.get('/api/categories');

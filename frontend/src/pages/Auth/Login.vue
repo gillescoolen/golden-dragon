@@ -50,13 +50,14 @@ export default class Login extends Vue {
   @Action('authenticate', { namespace: 'auth' })
   authenticate!: (payload: AuthenticationPayload) => void;
 
-  /**
-   * Calls the store to authenticate the user.
-   */
+  @Action('fetchRole', { namespace: 'auth' })
+  fetchRole!: () => void;
+
   public async login() {
     try {
       await this.authenticate({ id: this.id, password: this.password });
-      this.$router.push({ name: 'Register' });
+      await this.fetchRole();
+      this.$router.push({ name: 'register' });
     } catch (error) {
       this.error = 'Er is iets misgegaan.';
     }

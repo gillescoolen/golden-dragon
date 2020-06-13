@@ -5,6 +5,7 @@ import Login from '@/pages/Auth/Login.vue';
 import Overview from '@/pages/Register/Overview.vue';
 import Register from '@/pages/Register/Register.vue';
 import Sales from '@/pages/Register/Sales.vue';
+import Users from '@/pages/Register/Users.vue';
 import Contact from '@/pages/Site/Contact.vue';
 import Home from '@/pages/Site/Home.vue';
 import Menu from '@/pages/Site/Menu.vue';
@@ -75,6 +76,12 @@ const routes: Array<RouteConfig> = [
     name: 'overview',
     meta: { layout: 'register-layout' },
     component: Overview
+  },
+  {
+    path: '/users',
+    name: 'users',
+    meta: { layout: 'register-layout' },
+    component: Users
   },
   {
     path: '/tablet',

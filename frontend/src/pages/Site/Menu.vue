@@ -39,7 +39,7 @@ import jsPDF from 'jspdf';
 
 @Component
 export default class Menu extends Vue {
-  categories: Dish[] | null = null;
+  categories: Dish[] = [];
 
   generatePDF() {
     const doc = new jsPDF();

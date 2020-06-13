@@ -1,30 +1,32 @@
 <template>
   <div class="register">
-    <transition name="fade" mode="out-in">
-      <div v-if="categories.length" class="container categories">
-        <div
-          class="category"
-          v-for="category in categories"
-          :key="category.name"
-        >
-          <h1>{{ category.name }}</h1>
-          <div class="dishes">
-            <Row
-              class="row"
-              v-for="dish in category.dishes"
-              :key="dish.id"
-              :name="getDishName(dish)"
-              :description="dish.description"
-            >
-              <span class="price">€ {{ dish.price.toFixed(2) }}</span>
-              <Button small="true" @click.native="addDish(dish)">
-                Toevoegen!
-              </Button>
-            </Row>
+    <div class="container categories">
+      <transition name="fade" mode="out-in">
+        <div v-if="categories.length">
+          <div
+            class="category"
+            v-for="category in categories"
+            :key="category.name"
+          >
+            <h1>{{ category.name }}</h1>
+            <div class="dishes">
+              <Row
+                class="row"
+                v-for="dish in category.dishes"
+                :key="dish.id"
+                :name="getDishName(dish)"
+                :description="dish.description"
+              >
+                <span class="price">€ {{ dish.price.toFixed(2) }}</span>
+                <Button small="true" @click.native="addDish(dish)">
+                  Toevoegen!
+                </Button>
+              </Row>
+            </div>
           </div>
         </div>
-      </div>
-    </transition>
+      </transition>
+    </div>
     <div class="container order">
       <h1>Bestelling</h1>
       <transition-group name="list-complete" tag="div" class="dishes">
@@ -34,9 +36,9 @@
           :key="dish.id"
           :name="getDishName(dish)"
         >
-          <span class="price"
-            >€ {{ (dish.price * dish.amount).toFixed(2) }}</span
-          >
+          <span class="price">
+            € {{ (dish.price * dish.amount).toFixed(2) }}
+          </span>
           <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
           <span class="amount">{{ dish.amount }}</span>
           <Button small="true" @click.native="addDish(dish)">Meer!</Button>
@@ -72,7 +74,7 @@ import DishItem from '@/components/UI/DishItem.vue';
   }
 })
 export default class Register extends Vue {
-  categories: Category[] | null = null;
+  categories: Category[] = [];
   order: Dish[] = [];
 
   addDish(dish: Dish) {

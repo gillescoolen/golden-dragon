@@ -37,3 +37,15 @@ export type News = {
   id: number;
   content: string;
 };
+
+export type User = {
+  id: number;
+  role: Role;
+};
+
+export enum Role {
+  Admin = 'admin',
+  Worker = 'kassamedewerker',
+  Waitress = 'serveerster',
+  Customer = 'klant'
+}

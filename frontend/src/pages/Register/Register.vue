@@ -18,9 +18,9 @@
                 :description="dish.description"
               >
                 <span class="price">€ {{ dish.price.toFixed(2) }}</span>
-                <Button small="true" @click.native="addDish(dish)">
-                  Toevoegen!
-                </Button>
+                <Button small="true" @click.native="addDish(dish)"
+                  >Toevoegen!</Button
+                >
               </Row>
             </div>
           </div>
@@ -31,27 +31,30 @@
       <h1>Bestelling</h1>
       <transition-group name="list-complete" tag="div" class="dishes">
         <Row
-          class="row  list-complete-item"
+          class="row list-complete-item"
           v-for="dish in order"
           :key="dish.id"
           :name="getDishName(dish)"
         >
-          <span class="price">
-            € {{ (dish.price * dish.amount).toFixed(2) }}
-          </span>
+          <span class="price"
+            >€ {{ (dish.price * dish.amount).toFixed(2) }}</span
+          >
           <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
           <span class="amount">{{ dish.amount }}</span>
           <Button small="true" @click.native="addDish(dish)">Meer!</Button>
         </Row>
       </transition-group>
+      <div class="comment">
+        <input v-model="comment" type="text" />
+      </div>
       <div class="footer">
-        <Button :disabled="!order.length" @click.native="clear()">
-          Verwijderen
-        </Button>
+        <Button :disabled="!order.length" @click.native="clear()"
+          >Verwijderen</Button
+        >
         <h2>Totaal € {{ price.toFixed(2) }}</h2>
-        <Button :disabled="!order.length" @click.native="submit()">
-          Afrekenen
-        </Button>
+        <Button :disabled="!order.length" @click.native="submit()"
+          >Afrekenen</Button
+        >
       </div>
     </div>
   </div>
@@ -76,6 +79,7 @@ import DishItem from '@/components/UI/DishItem.vue';
 export default class Register extends Vue {
   categories: Category[] = [];
   order: Dish[] = [];
+  comment = '';
 
   addDish(dish: Dish) {
     const index = this.order.findIndex(item => item.id === dish.id);
@@ -102,7 +106,7 @@ export default class Register extends Vue {
   }
 
   async submit() {
-    await api.post('/api/orders', { order: this.order });
+    await api.post('/api/orders', { order: this.order, comment: this.comment });
 
     this.clear();
 

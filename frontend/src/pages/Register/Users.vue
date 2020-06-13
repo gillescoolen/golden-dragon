@@ -27,10 +27,14 @@
 import { Component, Vue } from 'vue-property-decorator';
 import { Role, User } from '../../types';
 import api from '@/utils/api';
+import { Getter } from 'vuex-class';
 
 @Component
 export default class Users extends Vue {
   users: User[] = [];
+
+  @Getter('getRole', { namespace: 'auth' })
+  role!: Role;
 
   public async updateRole(id: number, role: Role) {
     try {
@@ -60,6 +64,8 @@ export default class Users extends Vue {
   }
 
   created() {
+    if (this.role !== Role.Admin) this.$router.push('/register');
+
     this.fetchUsers();
   }
 }

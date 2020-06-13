@@ -1,10 +1,29 @@
 <template>
   <div>
-    <h3>
-      Door de Corona crisis is De Gouden Draak op het moment slechts beperkt
-      open. <br />Het restaurant-gedeelte is gesloten. U kan uw favoriete
-      gerechten nog wel afhalen.
-    </h3>
-    <br />
+    <div v-for="item in news" :key="item.id">
+      <h3>
+        {{ item.content }}
+      </h3>
+      <br />
+    </div>
   </div>
 </template>
+
+<script lang="ts">
+import { Component, Vue } from 'vue-property-decorator';
+import { News } from '@/types';
+import api from '@/utils/api';
+
+@Component
+export default class Menu extends Vue {
+  news: News[] = [];
+
+  private async fetchNews() {
+    const { data: news } = await api.get('/api/news');
+    this.news = news;
+  }
+  async created() {
+    await this.fetchNews();
+  }
+}
+</script>

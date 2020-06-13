@@ -32,3 +32,8 @@ export type Category = {
   name: string;
   dishes: Dish[];
 };
+
+export type News = {
+  id: number;
+  content: string;
+};

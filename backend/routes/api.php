@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
     Route::post('logout', 'AuthController@logout');
 });
 
+Route::get('news', 'NewsController@all');
 
 Route::get('dishes', 'DishController@all');
 Route::get('dishes/{id}', 'DishController@single');

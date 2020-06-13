@@ -23,6 +23,7 @@ class CreateOrderDishesTable extends Migration
                 ->onDelete('cascade');
 
             $table->integer('amount');
+            $table->string('comment')->default('');
         });
     }
 

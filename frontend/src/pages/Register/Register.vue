@@ -1,5 +1,29 @@
 <template>
   <div class="register">
+    <Modal v-if="show">
+      <h1>{{ selectedDish.name }}</h1>
+      <div class="comment">
+        Comment
+        <input v-model="comment" type="text" />
+      </div>
+      <div class="extra">
+        <select
+          v-model="extra"
+          :disabled="!enableSideDish"
+          @change="addSideDish()"
+        >
+          <option :key="99" :value="null" selected>
+            Witte Rijst (Standaard)
+          </option>
+          <option v-for="extra in extras" :key="extra.id" :value="extra">
+            {{ extra.name }}
+          </option>
+        </select>
+      </div>
+      <Button small="true" @click.native="closeModal(selectedDish)">
+        Toevoegen!
+      </Button>
+    </Modal>
     <div class="container categories">
       <transition name="fade" mode="out-in">
         <div v-if="categories.length">
@@ -18,7 +42,7 @@
                 :description="dish.description"
               >
                 <span class="price">€ {{ dish.price.toFixed(2) }}</span>
-                <Button small="true" @click.native="addDish(dish)"
+                <Button small="true" @click.native="openModal(dish)"
                   >Toevoegen!</Button
                 >
               </Row>
@@ -44,9 +68,6 @@
           <Button small="true" @click.native="addDish(dish)">Meer!</Button>
         </Row>
       </transition-group>
-      <div class="comment">
-        <input v-model="comment" type="text" />
-      </div>
       <div class="footer">
         <Button :disabled="!order.length" @click.native="clear()"
           >Verwijderen</Button
@@ -66,6 +87,7 @@ import { Category, Dish } from '@/types';
 import api from '@/utils/api';
 
 import Row from '@/components/UI/Row.vue';
+import Modal from '@/components/UI/Modal.vue';
 import Button from '@/components/UI/Button.vue';
 import DishItem from '@/components/UI/DishItem.vue';
 
@@ -73,20 +95,48 @@ import DishItem from '@/components/UI/DishItem.vue';
   components: {
     DishItem,
     Button,
-    Row
+    Row,
+    Modal
   }
 })
 export default class Register extends Vue {
   categories: Category[] = [];
   order: Dish[] = [];
+  extras: Dish[] = [];
+  extra: Dish | null = null;
+  selectedDish: Dish | null = null;
   comment = '';
+  show = false;
+  enableSideDish = false;
 
   addDish(dish: Dish) {
     const index = this.order.findIndex(item => item.id === dish.id);
-
     index != -1
       ? this.order[index].amount++
-      : this.order.push({ ...dish, amount: 1 });
+      : this.order.push({
+          ...dish,
+          amount: 1,
+          comment: this.comment
+        });
+
+    if (this.extra !== null) {
+      const extra = this.extra;
+      this.extra = null;
+      this.addDish(extra);
+    }
+  }
+
+  openModal(dish: Dish) {
+    this.show = true;
+    this.enableSideDish = true;
+    this.selectedDish = dish;
+  }
+
+  closeModal(dish: Dish) {
+    this.addDish(dish);
+    this.show = false;
+    this.comment = '';
+    this.selectedDish = null;
   }
 
   clear() {
@@ -103,6 +153,11 @@ export default class Register extends Vue {
   private async fetchCategories() {
     const { data: categories } = await api.get('/api/categories');
     this.categories = categories;
+  }
+
+  private async fetchExtras() {
+    const { data: extras } = await api.get('/api/dishes/extras');
+    this.extras = extras;
   }
 
   async submit() {
@@ -124,8 +179,9 @@ export default class Register extends Vue {
     return this.order.reduce((a, b) => a + b.price * b.amount, 0);
   }
 
-  async created() {
-    await this.fetchCategories();
+  created() {
+    this.fetchCategories();
+    this.fetchExtras();
   }
 }
 </script>

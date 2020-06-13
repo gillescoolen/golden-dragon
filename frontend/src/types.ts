@@ -45,7 +45,7 @@ export type User = {
 
 export enum Role {
   Admin = 'admin',
-  Worker = 'medewerker',
+  Worker = 'kassamedewerker',
   Waitress = 'serveerster',
   Customer = 'klant'
 }

@@ -18,5 +18,29 @@ class UserSeeder extends Seeder
                 'role' => 'admin'
             ],
         ]);
+        User::insert([
+            [
+                'password' => bcrypt('password'),
+                'role' => 'kassamedewerker'
+            ],
+        ]);
+        User::insert([
+            [
+                'password' => bcrypt('password'),
+                'role' => 'serveerster'
+            ],
+        ]);
+        User::insert([
+            [
+                'password' => bcrypt('password'),
+                'role' => 'serveerster'
+            ],
+        ]);
+        User::insert([
+            [
+                'password' => bcrypt('password'),
+                'role' => 'klant'
+            ],
+        ]);
     }
 }

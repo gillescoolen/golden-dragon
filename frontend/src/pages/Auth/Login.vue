@@ -57,7 +57,7 @@ export default class Login extends Vue {
     try {
       await this.authenticate({ id: this.id, password: this.password });
       await this.fetchRole();
-      this.$router.push({ name: 'Register' });
+      this.$router.push({ name: 'register' });
     } catch (error) {
       this.error = 'Er is iets misgegaan.';
     }

@@ -48,7 +48,7 @@ import OrderModal from '@/components/Tablet/OrderModal.vue';
 })
 export default class Dishes extends Vue {
   show = false;
-  dishes: Dish[] | null = null;
+  dishes: Dish[] = [];
 
   @Mutation('clearOrder', { namespace: 'tablet' })
   clearOrder!: () => void;

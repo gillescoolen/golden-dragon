@@ -59,7 +59,7 @@ export default class Menu extends Vue {
   name = '';
   code = '';
   ordered = false;
-  categories: Dish[] | null = null;
+  categories: Dish[] = [];
 
   @Mutation('addDish', { namespace: 'site' })
   addDish!: (dish: Dish) => void;

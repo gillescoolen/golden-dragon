@@ -20,7 +20,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::get('users', 'UserController@all');
     Route::get('user/role', 'UserController@role');
-    Route::post('user', 'UserController@update');
+    Route::post('user/{id}', 'UserController@update');
 });
 
 Route::get('news', 'NewsController@all');

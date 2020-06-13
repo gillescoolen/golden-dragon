@@ -1,17 +1,18 @@
 import api from '@/utils/api';
 import { Action, Module, Mutation, VuexModule } from 'vuex-module-decorators';
+import { Role } from '../types';
 
 @Module({
   namespaced: true
 })
 export default class Auth extends VuexModule {
   token = '';
-  role = '';
+  role: Role | null = null;
 
   @Mutation
   clear() {
     this.token = '';
-    this.role = '';
+    this.role = null;
 
     api.defaults.headers = {
       Authorization: `Bearer ${this.token}`
@@ -28,7 +29,7 @@ export default class Auth extends VuexModule {
   }
 
   @Mutation
-  setRole(role: string) {
+  setRole(role: Role) {
     this.role = role;
   }
 
@@ -61,7 +62,7 @@ export default class Auth extends VuexModule {
     return this.token;
   }
 
-  get getRole(): string {
+  get getRole(): Role | null {
     return this.role;
   }
 }

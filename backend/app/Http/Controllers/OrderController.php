@@ -20,12 +20,17 @@ class OrderController extends Controller
     public function create(Request $request)
     {
         $order = Order::create([
-            'comment' => $request->get('comment') ? $request->get('comment') : '',
             'date' => date('Y-m-d')
         ]);
 
         foreach ($request->get('order') as $key => $value) {
-            $order->dishes()->attach($value['id'], ['amount' => $value['amount']]);
+            $order->dishes()->attach(
+                $value['id'], 
+                [
+                    'amount' => $value['amount'],
+                    'comment' => $value['comment']
+                ], 
+            );
             $order->save();
         }
 

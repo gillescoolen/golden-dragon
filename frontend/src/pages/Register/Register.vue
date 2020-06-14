@@ -1,60 +1,82 @@
 <template>
-  <div class="register">
-    <div class="container categories">
-      <transition name="fade" mode="out-in">
-        <div v-if="categories.length">
-          <div
-            class="category"
-            v-for="category in categories"
-            :key="category.name"
-          >
-            <h1>{{ category.name }}</h1>
-            <div class="dishes">
-              <Row
-                class="row"
-                v-for="dish in category.dishes"
-                :key="dish.id"
-                :name="getDishName(dish)"
-                :description="dish.description"
-              >
-                <span class="price">€ {{ dish.price.toFixed(2) }}</span>
-                <Button small="true" @click.native="addDish(dish)"
-                  >Toevoegen!</Button
+  <div class="wrapper">
+    <transition name="fade" mode="out-in">
+      <Modal v-if="show" @close="show = false">
+        <h1>{{ selectedDish.name }}</h1>
+        <div class="extra">
+          <Input v-model="comment" label="Gerechtnotitie" type="text" />
+          <select v-model="extra">
+            <option key="null" :value="null" selected>
+              Witte Rijst (Standaard)
+            </option>
+            <option v-for="extra in extras" :key="extra.id" :value="extra">
+              {{ extra.name }}
+            </option>
+          </select>
+        </div>
+        <Button @click.native="closeModal(selectedDish)">
+          Toevoegen!
+        </Button>
+      </Modal>
+    </transition>
+    <div class="register" :class="{ blur: show }">
+      <div class="container categories">
+        <transition name="fade" mode="out-in">
+          <div v-if="categories.length">
+            <div
+              class="category"
+              v-for="category in categories"
+              :key="category.name"
+            >
+              <h1>{{ category.name }}</h1>
+              <div class="dishes">
+                <Row
+                  class="row"
+                  v-for="dish in category.dishes"
+                  :key="dish.id"
+                  :name="getDishName(dish)"
+                  :description="dish.description"
                 >
-              </Row>
+                  <span class="price">€ {{ dish.price.toFixed(2) }}</span>
+                  <Button small="true" @click.native="openModal(dish)"
+                    >Toevoegen!</Button
+                  >
+                </Row>
+              </div>
             </div>
           </div>
-        </div>
-      </transition>
-    </div>
-    <div class="container order">
-      <h1>Bestelling</h1>
-      <transition-group name="list-complete" tag="div" class="dishes">
-        <Row
-          class="row list-complete-item"
-          v-for="dish in order"
-          :key="dish.id"
-          :name="getDishName(dish)"
-        >
-          <span class="price"
-            >€ {{ (dish.price * dish.amount).toFixed(2) }}</span
-          >
-          <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
-          <span class="amount">{{ dish.amount }}</span>
-          <Button small="true" @click.native="addDish(dish)">Meer!</Button>
-        </Row>
-      </transition-group>
-      <div class="comment">
-        <input v-model="comment" type="text" />
+        </transition>
       </div>
-      <div class="footer">
-        <Button :disabled="!order.length" @click.native="clear()"
-          >Verwijderen</Button
-        >
-        <h2>Totaal € {{ price.toFixed(2) }}</h2>
-        <Button :disabled="!order.length" @click.native="submit()"
-          >Afrekenen</Button
-        >
+
+      <div class="container order">
+        <h1>Bestelling</h1>
+        <transition-group name="list-complete" tag="div" class="dishes">
+          <Row
+            class="row list-complete-item"
+            v-for="dish in order"
+            :key="`${dish.id}-${dish.comment}`"
+            :name="getDishName(dish)"
+            :description="dish.comment"
+          >
+            <span class="price"
+              >€ {{ (dish.price * dish.amount).toFixed(2) }}</span
+            >
+            <Button small="true" @click.native="removeDish(dish)"
+              >Minder!</Button
+            >
+            <span class="amount">{{ dish.amount }}</span>
+            <Button small="true" @click.native="addDish(dish)">Meer!</Button>
+          </Row>
+        </transition-group>
+        <div class="footer">
+          <Button :disabled="!order.length" @click.native="clear()"
+            >Verwijderen</Button
+          >
+          <h2>Totaal € {{ price.toFixed(2) }}</h2>
+          <Button :disabled="!order.length" @click.native="submit()"
+            >Afrekenen</Button
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -66,6 +88,8 @@ import { Category, Dish } from '@/types';
 import api from '@/utils/api';
 
 import Row from '@/components/UI/Row.vue';
+import Input from '@/components/UI/Input.vue';
+import Modal from '@/components/UI/Modal.vue';
 import Button from '@/components/UI/Button.vue';
 import DishItem from '@/components/UI/DishItem.vue';
 
@@ -73,20 +97,49 @@ import DishItem from '@/components/UI/DishItem.vue';
   components: {
     DishItem,
     Button,
+    Modal,
+    Input,
     Row
   }
 })
 export default class Register extends Vue {
   categories: Category[] = [];
   order: Dish[] = [];
+  extras: Dish[] = [];
+  extra: Dish | null = null;
+  selectedDish: Dish | null = null;
   comment = '';
+  show = false;
 
   addDish(dish: Dish) {
     const index = this.order.findIndex(item => item.id === dish.id);
+    console.log(this.comment);
 
-    index != -1
+    index != -1 && this.order[index].comment == this.comment
       ? this.order[index].amount++
-      : this.order.push({ ...dish, amount: 1 });
+      : this.order.push({
+          ...dish,
+          amount: 1,
+          comment: this.comment
+        });
+
+    if (this.extra !== null) {
+      const extra = this.extra;
+      this.extra = null;
+      this.addDish(extra);
+    }
+  }
+
+  openModal(dish: Dish) {
+    this.show = true;
+    this.selectedDish = dish;
+  }
+
+  closeModal(dish: Dish) {
+    this.addDish(dish);
+    this.show = false;
+    this.comment = '';
+    this.selectedDish = null;
   }
 
   clear() {
@@ -94,7 +147,9 @@ export default class Register extends Vue {
   }
 
   removeDish(dish: Dish) {
-    const index = this.order.findIndex(item => item.id === dish.id);
+    const index = this.order.findIndex(
+      item => item.id === dish.id && item.comment === dish.comment
+    );
     const item = this.order[index];
 
     item.amount > 1 ? this.order[index].amount-- : this.order.splice(index, 1);
@@ -103,6 +158,11 @@ export default class Register extends Vue {
   private async fetchCategories() {
     const { data: categories } = await api.get('/api/categories');
     this.categories = categories;
+  }
+
+  private async fetchExtras() {
+    const { data: extras } = await api.get('/api/dishes/extras');
+    this.extras = extras;
   }
 
   async submit() {
@@ -124,13 +184,24 @@ export default class Register extends Vue {
     return this.order.reduce((a, b) => a + b.price * b.amount, 0);
   }
 
-  async created() {
-    await this.fetchCategories();
+  created() {
+    this.fetchCategories();
+    this.fetchExtras();
   }
 }
 </script>
 
 <style lang="scss" scoped>
+.wrapper {
+  overflow-y: hidden;
+
+  .extra {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
 .register {
   width: 100%;
   display: flex;

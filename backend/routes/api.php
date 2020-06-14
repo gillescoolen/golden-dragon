@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth:sanctum'], function () {
 Route::get('news', 'NewsController@all');
 
 Route::get('dishes', 'DishController@all');
+Route::get('dishes/extras', 'DishController@extras');
 Route::get('dishes/{id}', 'DishController@single');
 
 Route::get('orders', 'OrderController@all');

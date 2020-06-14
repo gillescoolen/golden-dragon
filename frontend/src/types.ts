@@ -10,6 +10,7 @@ export type Dish = {
   category: string;
   allergies: Allergy[];
   amount: number;
+  comment?: string;
 };
 
 export type Order = {

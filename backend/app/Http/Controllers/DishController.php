@@ -15,4 +15,9 @@ class DishController extends Controller
     {
         return Dish::where('id', '=', $id)->with('allergies')->first();
     }
+
+    public function extras()
+    {
+        return Dish::where('category', '=', "DIVERSEN")->get();
+    }
 }

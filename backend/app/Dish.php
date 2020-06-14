@@ -19,7 +19,7 @@ class Dish extends Model
 
     public function orders()
     {
-        return $this->belongsToMany('App\Order')->withPivot('amount');
+        return $this->belongsToMany('App\Dish')->withPivot(['amount', 'comment']);
     }
 
     public function allergies()

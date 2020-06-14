@@ -25,15 +25,23 @@ class OrderController extends Controller
 
         foreach ($request->get('order') as $key => $value) {
             $order->dishes()->attach(
-                $value['id'], 
+                $value['id'],
                 [
                     'amount' => $value['amount'],
-                    'comment' => $value['comment']
-                ], 
+                    'comment' => $value['comment'] ? $value['comment'] : ''
+                ],
             );
             $order->save();
         }
 
         return Order::where('id', '=', $order->id)->with('dishes')->first();
+    }
+
+    public function history(Request $request)
+    {
+        return Order::where([
+            ['date', '>=', $request->begin],
+            ['date', '<=', $request->end],
+        ])->with('dishes')->get();
     }
 }

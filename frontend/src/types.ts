@@ -50,3 +50,30 @@ export enum Role {
   Waitress = 'serveerster',
   Customer = 'klant'
 }
+
+export type OrderResponse = {
+  id: number;
+  date: Date;
+  comment: string;
+  dishes: DishResponse[];
+};
+
+export type DishResponse = {
+  id: number;
+  name: string;
+  description: null | string;
+  price: number;
+  prefix: null | string;
+  index: number;
+  suffix: null | string;
+  spicyness: number;
+  category: string;
+  pivot: OrderDishPivot;
+};
+
+export type OrderDishPivot = {
+  order_id: number;
+  dish_id: number;
+  amount: number;
+  comment: string;
+};

@@ -1,6 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,5 +31,6 @@ Route::get('dishes/{id}', 'DishController@single');
 Route::get('orders', 'OrderController@all');
 Route::get('orders/{id}', 'OrderController@single');
 Route::post('orders', 'OrderController@create');
+Route::post('orders/history', 'OrderController@history');
 
 Route::get('categories', 'CategoryController@allWithDishes');

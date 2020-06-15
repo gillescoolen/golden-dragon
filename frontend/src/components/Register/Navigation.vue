@@ -44,6 +44,7 @@ export default class Navigation extends Vue {
   flex-direction: row;
   justify-content: space-between;
 
+  user-select: none;
   margin: 0 0 1rem 0;
   border-radius: 1rem;
   padding: 0.5rem 1rem;

@@ -24,10 +24,16 @@ button {
   font-weight: 700;
   border-radius: 1rem;
   background: linear-gradient(124deg, var(--primary), var(--secondary));
+  transition: 0.2s all;
 
   &:disabled {
     cursor: default;
     background: var(--gray);
+  }
+
+  &:active {
+    transition: 0.01s all;
+    transform: translate(0, 0.1rem);
   }
 }
 

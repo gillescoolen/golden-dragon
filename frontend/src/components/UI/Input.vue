@@ -18,10 +18,10 @@ import { Component, Vue, Prop } from 'vue-property-decorator';
 
 @Component
 export default class Input extends Vue {
-  @Prop({ default: 'ID' })
+  @Prop({ default: 'Default' })
   label!: string;
 
-  @Prop({ default: 'name' })
+  @Prop({ default: '' })
   name!: string;
 
   @Prop({ default: 'text' })
@@ -58,6 +58,7 @@ export default class Input extends Vue {
   font-size: 1rem;
   transition: 0.2s;
   user-select: none;
+  font-family: 'Jost';
   background: transparent;
   border-bottom: 2px solid var(--gray);
 

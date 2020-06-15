@@ -113,7 +113,6 @@ export default class Register extends Vue {
 
   addDish(dish: Dish) {
     const index = this.order.findIndex(item => item.id === dish.id);
-    console.log(this.comment);
 
     index != -1 && this.order[index].comment == this.comment
       ? this.order[index].amount++
@@ -123,11 +122,11 @@ export default class Register extends Vue {
           comment: this.comment
         });
 
-    if (this.extra !== null) {
-      const extra = this.extra;
-      this.extra = null;
-      this.addDish(extra);
-    }
+    if (this.extra === null) return;
+
+    const extra = this.extra;
+    this.extra = null;
+    this.addDish(extra);
   }
 
   openModal(dish: Dish) {
@@ -155,12 +154,16 @@ export default class Register extends Vue {
     item.amount > 1 ? this.order[index].amount-- : this.order.splice(index, 1);
   }
 
-  private async fetchCategories() {
+  getDishName(dish: Dish) {
+    return `${dish.prefix}${dish.index}${dish.suffix}. ${dish.name}`;
+  }
+
+  async fetchCategories() {
     const { data: categories } = await api.get('/api/categories');
     this.categories = categories;
   }
 
-  private async fetchExtras() {
+  async fetchExtras() {
     const { data: extras } = await api.get('/api/dishes/extras');
     this.extras = extras;
   }
@@ -174,10 +177,6 @@ export default class Register extends Vue {
       duration: 1000,
       position: 'top-center'
     });
-  }
-
-  getDishName(dish: Dish) {
-    return `${dish.prefix}${dish.index}${dish.suffix}. ${dish.name}`;
   }
 
   get price(): number {

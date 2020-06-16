@@ -15,9 +15,7 @@
         :description="dish.description"
       >
         <span class="price">€ {{ (dish.price * dish.amount).toFixed(2) }}</span>
-        <Button small="true" @click.native="removeDish(dish)">Minder!</Button>
-        <span class="amount">{{ dish.amount }}</span>
-        <Button small="true" @click.native="addDish(dish)">Meer!</Button>
+        <span class="amount">{{ dish.amount }}x</span>
       </Row>
     </div>
     <div class="ordered-dishes" v-else-if="order.length">

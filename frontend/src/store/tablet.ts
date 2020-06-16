@@ -22,7 +22,7 @@ export default class Tablet extends VuexModule {
 
     index != -1
       ? this.order[index].amount++
-      : this.order.push({ ...dish, amount: 1 });
+      : this.order.push({ ...dish, amount: 1, comment: 'Tabletbestelling' });
   }
 
   /**

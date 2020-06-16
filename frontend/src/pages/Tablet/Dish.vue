@@ -51,7 +51,7 @@ export default class Single extends Vue {
       position: 'top-center'
     });
     this.addDish(dish);
-    this.$router.push({ name: 'Tablet' });
+    this.$router.push({ name: 'tablet' });
   }
 
   async created() {

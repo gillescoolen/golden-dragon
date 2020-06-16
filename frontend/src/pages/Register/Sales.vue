@@ -5,6 +5,11 @@
       <Input v-model="end" label="Einddatum" type="date" />
       <Button @click.native="submit" :disabled="disabled">Submit</Button>
     </div>
+    <div v-if="dishes.length" class="details">
+      <span>Totaal: €{{ total.toFixed(2) }}</span>
+      <span>BTW (9%): €{{ tax.toFixed(2) }}</span>
+      <span>Totaal ex. BTW: €{{ untaxed.toFixed(2) }}</span>
+    </div>
 
     <div v-if="dishes.length" class="sales">
       <div class="heading">
@@ -34,7 +39,9 @@
       <img src="@/assets/svg/sitting.svg" />
       <h1>
         {{
-          empty ? 'Geen gerechten besteld in deze periode' : 'Kies een periode'
+          !this.dishes.length
+            ? 'Geen gerechten besteld in deze periode'
+            : 'Kies een periode'
         }}
       </h1>
     </div>
@@ -60,7 +67,6 @@ import Spinner from '@/components/UI/Spinner.vue';
 export default class Sales extends Vue {
   dishes: DishResponse[] = [];
   loading = false;
-  empty = false;
   begin = '';
   end = '';
 
@@ -83,7 +89,6 @@ export default class Sales extends Vue {
       existing ? existing.pivot.amount++ : this.dishes.push(dish);
     });
 
-    this.empty = !this.dishes.length;
     this.loading = false;
   }
 
@@ -93,6 +98,18 @@ export default class Sales extends Vue {
     if (new Date(this.begin) >= new Date(this.end)) return true;
 
     return false;
+  }
+
+  get total(): number {
+    return this.dishes.reduce((a, b) => a + b.price * b.pivot.amount, 0);
+  }
+
+  public get tax(): number {
+    return this.total * 0.09;
+  }
+
+  public get untaxed(): number {
+    return this.total - this.tax;
   }
 }
 </script>
@@ -121,6 +138,27 @@ export default class Sales extends Vue {
 
     > * {
       width: 20%;
+    }
+  }
+
+  .details {
+    height: 3rem;
+    font-size: 1.2rem;
+    padding: 1rem;
+    margin-bottom: 2rem;
+
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+
+    border-top: 2px solid gray;
+    border-bottom: 2px solid gray;
+    border-image: linear-gradient(to right, var(--primary), var(--secondary));
+    border-image-slice: 1;
+
+    span {
+      font-weight: 500;
     }
   }
 

@@ -5,6 +5,7 @@
       <div class="user" v-for="user in users" :key="user.id">
         <h3>Gebruiker #{{ user.id }}</h3>
         <select
+          :disabled="user.role === 'admin'"
           @change="updateRole(user.id, $event.target.value)"
           name="role"
           id="role"

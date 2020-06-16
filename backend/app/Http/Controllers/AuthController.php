@@ -10,7 +10,6 @@ class AuthController extends Controller
 {
     public function login(Request $request)
     {
-        //TODO: Validate id and password.
         $credentials = request(['id', 'password']);
 
         if (!Auth::attempt($credentials)) return $this->unauthorized();

@@ -21,7 +21,7 @@ export default class Site extends VuexModule {
 
     index != -1
       ? this.order[index].amount++
-      : this.order.push({ ...dish, amount: 1 });
+      : this.order.push({ ...dish, amount: 1, comment: '' });
   }
 
   /**
@@ -44,9 +44,12 @@ export default class Site extends VuexModule {
     this.order = [];
   }
 
-  @Action
+  @Action({ rawError: true })
   async submitOrder(dishes: Dish[]) {
-    return await api.post('/api/orders', { order: dishes });
+    return await api.post('/api/orders', {
+      order: dishes,
+      comment: 'Bestelling via de site.'
+    });
   }
 
   get getOrder(): Dish[] {

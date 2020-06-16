@@ -8,7 +8,9 @@
     <div>
       <label for="name">Naam</label>
       <input v-model="name" type="text" name="name" required />
-      <button @click="submit(order)">Bestellen</button>
+      <button :disabled="!order.length || !name" @click="submit(order)">
+        Bestellen
+      </button>
     </div>
     <h3>Bestelling: € {{ price.toFixed(2) }}</h3>
     <div class="order">

@@ -269,6 +269,7 @@
 
 <style lang="scss">
 body {
+  overflow-y: auto;
   background-color: darkred;
 }
 

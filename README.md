@@ -1,4 +1,4 @@
-# Gōrudendoragon
+# Golden Dragon
 
 ## Running the backend.
 1. Make sure you have [Composer](https://getcomposer.org/) & [PHP](https://www.php.net/downloads) installed!
@@ -19,46 +19,3 @@
 1. Make sure you have [Node](https://nodejs.org/en/) & [dbdocs.io](https://dbdocs.io/) installed!
 2. Run `dbdocs build docs/database.dbml` in your terminal.
 3. Voilà! View the page at [dbdocs.io/GillesWHC/golden_dragon](https://dbdocs.io/GillesWHC/golden_dragon).
-
-# Features
-Apart from the basic features, there are 8 user stories we need to complete to get a decent grade.
-
-## Customer
-
-### 1.2
-Als klant wil ik bij gerechten informatie zien over allergenen en pittigheid zodat ik hiermee rekening kan houden 
-- De allergenen die minimaal getoond moeten worden zijn: bevat gluten, bevat lactose, bevat varkensvlees 
-- De pittigheid wordt getoond op een driepuntschaal. Bij geen indicatie is een gerecht niet pittig. 
-
-### 1.4
-Als klant wil ik een herhalingsbestelling doen bij mijn tafel. Met andere woorden, er is een historie waaruit ik makkelijk een nieuwe bestelling kan plaatsen
-
-
-## Cash Registry
-
-### 2.2
-Als kassamedewerker kan ik opmerkingen toevoegen aan een gerecht op een bestelling zodat klant specifieke wensen meegenomen kunnen worden in de bestelling 
-
-- Ieder gerecht op een bestelling zou dus opmerkingen kunnen krijgen, bv. “geen ui toevoegen.” 
-
-### 2.3
-Als kassamedewerker kan ik per gerecht aangeven of de klant witte rijst, nasi/bami goreng, mihoen goreng of chinese bami wil. 
-
-- Wanneer een gerecht besteld wordt, kan dit gelijk aangegeven worden. Meerdere nasi of bami bestellingen gaan via een nieuwe orderregel
-
-## Website
-
-### 3.2
-Als klant wil ik een up-to-date PDF van het menu kunnen downloaden. (generatie vanuit de database). Hierbij worden ook eventuele aanbiedingen afgedrukt op een aparte pagina in de PDF.
-
-### 3.4
-Als klant wil ik via de website een afhaal bestelling doorgeven. Bij de bedanktpagina krijg een een printbare QR Code waar, het bestelnummer,  gerecht nummer(s) en naam in staat opgeslagen.
-
-## Admin
-
-### 4.2
-Het menu wordt automatisch gegenereerd op de verschillende webpaginas vanuit de informatie in de database zodat alle menu informatie op alle plekken consistent is.
-
-### 4.3
-Als admin kan ik medewerkers met toegangsrechten toevoegen, aanpassen, en verwijderen zodat de toegang tot mijn site geregeld is 
-- de rechten die minimaal aanwezig moeten zijn: klant (geen rechten), kassamedewerker, serveerster, admin 
